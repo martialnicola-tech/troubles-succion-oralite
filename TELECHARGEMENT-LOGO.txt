@@ -1,0 +1,35 @@
+RÉCUPÉRATION DU LOGO DEPUIS LE SITE ACTUEL
+==========================================
+
+Le logo se trouve à cette URL sur votre site actuel :
+https://lh3.googleusercontent.com/sitesv/APaQ0STpBCQ0A_GsHaLoBP5czkBUyUlba7f1a2A198JXzlvyY-rgN432zK4vMYvcEBsztGGm4RjUygN432zK4vMYvcEBsztGGm4RjUygHZX12BV6oysb9c-eCUXEpyPUrEKhWb_8oAdvEm7er0BVqX_aXVH7vNpS7uFBFGVDPjkwRj5fHZSpHLLOFmvv2oqTSZClKesqmHDduvaXtJ4TofgzI=w16383
+
+ÉTAPES POUR RÉCUPÉRER LE LOGO :
+================================
+
+1. Ouvrez cette URL dans votre navigateur
+2. Clic droit sur l'image > "Enregistrer l'image sous..."
+3. Sauvegardez-la avec le nom : logo.png
+4. Placez le fichier dans le dossier images/ de votre nouveau site
+
+ALTERNATIVE :
+=============
+
+Si l'URL ne fonctionne pas :
+1. Allez sur https://www.troubles-succion-oralite.ch
+2. Clic droit sur le logo en haut de page
+3. "Enregistrer l'image sous..." ou "Copier l'image"
+4. Sauvegardez comme logo.png dans le dossier images/
+
+DIMENSIONS RECOMMANDÉES :
+=========================
+
+Le logo s'affichera avec une hauteur de 60px dans l'en-tête.
+Format recommandé : PNG avec fond transparent
+Largeur idéale : 200-400px de large pour 60px de haut (ratio à adapter selon votre logo)
+
+Si le logo est trop grand ou trop petit, vous pouvez ajuster la hauteur dans le CSS :
+Ouvrez css/style.css et modifiez la ligne :
+    .logo-img {
+        height: 60px;  /* Changez cette valeur */
+    }

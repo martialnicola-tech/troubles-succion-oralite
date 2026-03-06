@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Professionnels - Inscription 30 CHF/an</title>
+    <meta name="description" content="Rejoignez notre annuaire de professionnels spécialisés en troubles de la succion. 30 CHF/an, renouvellement automatique.">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .pro-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+        
+        .pricing-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            max-width: 600px;
+            margin: 3rem auto;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border: 3px solid var(--turquoise);
+        }
+        
+        .price {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .price-amount {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--turquoise);
+            line-height: 1;
+        }
+        
+        .price-period {
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+        
+        .price-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+        
+        .price-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .price-features li::before {
+            content: "✓";
+            color: var(--turquoise);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--turquoise);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            background: var(--turquoise-dark);
+            transform: translateY(-2px);
+        }
+        
+        .guarantee {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px dashed #e0e0e0;
+            color: var(--text-light);
+        }
+        
+        .faq-section {
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        
+        .faq-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--turquoise);
+        }
+        
+        .faq-question {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        .faq-answer {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+        <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Troubles de la Succion" class="logo-img">
+                </a>
+            </div>
+            <nav class="nav">
+                <button class="nav-toggle">☰</button>
+                <ul class="nav-menu">
+                    <li><a href="pour-qui.html">Pour qui ?</a></li>
+                    <li><a href="troubles.html">Troubles</a></li>
+                    <li class="has-dropdown">
+                        <a href="frein-langue.html">Frein langue</a>
+                        <ul class="dropdown">
+                            <li><a href="frein-levre.html">Frein de lèvre</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="on-coupe-ou-pas.html">On coupe ou pas ?</a></li>
+                    <li><a href="frenectomie.html">Frénectomie</a></li>
+                    <li><a href="exercices.html">Exercices</a></li>
+                    <li class="has-dropdown">
+                        <a href="equipe.html">Équipe</a>
+                        <ul class="dropdown">
+                            <li><a href="equipe-osteopathes.html">Ostéopathes</a></li>
+                            <li><a href="equipe-sages-femmes.html">Sages-Femmes</a></li>
+                            <li><a href="equipe-ibclc.html">IBCLC</a></li>
+                            <li><a href="equipe-lactation.html">Consultantes</a></li>
+                            <li><a href="equipe-logopedistes.html">Logopédistes</a></li>
+                            <li><a href="equipe-orl-dentistes.html">ORL & Dentistes</a></li>
+                            <li><a href="equipe-physiotherapeutes.html">Physiothérapeutes</a></li>
+                            <li><a href="equipe-nutrition.html">Nutritionnistes</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="annuaire.html">Annuaire</a></li>
+                    <li><a href="pro.html" class="active">Pro</a></li>
+                    <li class="has-dropdown">
+                        <a href="bases-scientifiques.html">Bases Scientifiques</a>
+                        <ul class="dropdown">
+                            <li><a href="references.html">Références</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" style="background-image: url('images/hero/pro.jpg'); background-color: var(--turquoise);">
+        <div class="hero-content">
+            <h1 class="hero-title">Espace Professionnels</h1>
+            <p class="hero-subtitle">Rejoignez notre réseau de spécialistes</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-3">Pourquoi rejoindre notre annuaire ?</h2>
+            
+            <div class="pro-benefits">
+                <div class="benefit-card">
+                    <div class="benefit-icon">👥</div>
+                    <h3>Visibilité accrue</h3>
+                    <p>Augmentez votre visibilité auprès des parents en Suisse romande cherchant un spécialiste des troubles de la succion.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Profil détaillé</h3>
+                    <p>Présentez vos compétences, formations et spécialités avec un profil professionnel complet.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🗺️</div>
+                    <h3>Référencement local</h3>
+                    <p>Apparaissez dans les recherches par canton et par spécialité pour toucher votre clientèle cible.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔗</div>
+                    <h3>Lien vers votre site</h3>
+                    <p>Ajoutez un lien vers votre site web pour rediriger les parents vers vos services.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🤝</div>
+                    <h3>Réseau professionnel</h3>
+                    <p>Faites partie d'un réseau de professionnels formés et reconnus en Suisse romande.</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">💳</div>
+                    <h3>Paiement simple</h3>
+                    <p>30 CHF/an avec renouvellement automatique via Stripe. TWINT accepté. Résiliable à tout moment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-turquoise">
+        <div class="container">
+            <div class="pricing-box">
+                <div class="price">
+                    <div class="price-amount">30 CHF</div>
+                    <div class="price-period">par an</div>
+                </div>
+                
+                <ul class="price-features">
+                    <li>Profil professionnel complet</li>
+                    <li>Référencement par canton et spécialité</li>
+                    <li>Lien vers votre site web (backlink)</li>
+                    <li>Coordonnées affichées (téléphone, email, adresse)</li>
+                    <li>Modification de votre profil à tout moment</li>
+                    <li>Renouvellement automatique annuel</li>
+                    <li>Résiliation simple en 1 clic</li>
+                    <li>Paiement sécurisé par Stripe ou TWINT</li>
+                </ul>
+                
+                <a href="inscription-professionnel.html" class="cta-button">
+                    S'inscrire maintenant →
+                </a>
+                
+                <div class="guarantee">
+                    <p>🔒 <strong>Paiement 100% sécurisé</strong><br>
+                    Vos données bancaires ne transitent jamais par nos serveurs.<br>
+                    Traitement par Stripe (certifié PCI Level 1).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-3">Questions fréquentes</h2>
+            
+            <div class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question">📋 Quelles sont les professions acceptées ?</div>
+                    <div class="faq-answer">
+                        Ostéopathes, sages-femmes, consultantes IBCLC, consultantes en lactation, logopédistes, 
+                        ORL, dentistes, physiothérapeutes et nutritionnistes spécialisés dans les troubles de la succion 
+                        et de l'oralité chez l'enfant.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">💳 Comment fonctionne le paiement ?</div>
+                    <div class="faq-answer">
+                        Le paiement se fait de manière sécurisée via Stripe. Vous payez 30 CHF pour la première année, 
+                        puis le renouvellement est automatique chaque année. Vous pouvez résilier à tout moment depuis 
+                        votre espace personnel.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">🔗 Qu'est-ce que la vérification du backlink ?</div>
+                    <div class="faq-answer">
+                        Pour afficher votre site web dans votre profil, vous devez ajouter un lien vers notre site 
+                        (troubles-succion-oralite.ch) depuis votre site. Cela permet de créer un réseau de confiance 
+                        et améliore le référencement de tous les membres.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">⏱️ Combien de temps pour être visible ?</div>
+                    <div class="faq-answer">
+                        Votre profil est activé immédiatement après le paiement et la validation de vos informations. 
+                        Si vous ajoutez un lien vers votre site web, la vérification du backlink peut prendre 24-48h.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">✏️ Puis-je modifier mes informations ?</div>
+                    <div class="faq-answer">
+                        Oui, vous pouvez modifier vos coordonnées, votre site web et toutes vos informations 
+                        à tout moment en nous contactant par email à info@troubles-succion-oralite.ch
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">🚫 Comment résilier mon abonnement ?</div>
+                    <div class="faq-answer">
+                        Vous pouvez résilier à tout moment en nous envoyant un email. La résiliation prendra effet 
+                        à la fin de votre période payée. Aucun remboursement au prorata n'est effectué.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">📍 Je suis hors Suisse romande, puis-je m'inscrire ?</div>
+                    <div class="faq-answer">
+                        Notre annuaire se concentre sur les 6 cantons de Suisse romande (VD, VS, GE, FR, NE, JU). 
+                        Si vous exercez dans un autre canton, contactez-nous pour discuter des possibilités.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-turquoise">
+        <div class="container text-center">
+            <h2 style="margin-bottom: 1rem;">Prêt à rejoindre le réseau ?</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                Commencez dès aujourd'hui et donnez plus de visibilité à votre pratique
+            </p>
+            <a href="inscription-professionnel.html" class="btn" style="background: white; color: var(--turquoise-dark); font-size: 1.2rem; padding: 1rem 3rem;">
+                S'inscrire - 30 CHF/an →
+            </a>
+        </div>
+    </section>
+
+            <footer class="footer">
+        <div class="footer-content">
+            <p>Copyright ©2026 | Toute reproduction même partielle est interdite. | <a href="contact.html">Contact</a> | Site réalisé par @mndesign</p>
+        </div>
+        <div class="footer-links">
+            <a href="#">Mentions Légale</a>
+            <a href="#">Politiques de Confidentialité</a>
+            <a href="#">Conditions Générales</a>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

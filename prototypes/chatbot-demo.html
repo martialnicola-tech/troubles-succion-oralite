@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype Chatbot "Sophie" - Troubles de la Succion</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Chatbot Widget */
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            font-family: var(--font-primary);
+        }
+        
+        .chat-bubble {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .chat-bubble:hover {
+            transform: scale(1.1);
+        }
+        
+        .chat-bubble.has-notification::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 12px;
+            height: 12px;
+            background-color: #ff4444;
+            border-radius: 50%;
+            border: 2px solid white;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .chat-window {
+            display: none;
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 380px;
+            height: 600px;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chat-window.open {
+            display: flex;
+            animation: slideUp 0.3s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chat-header {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .chat-info h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .chat-info p {
+            margin: 2px 0 0 0;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .chat-close {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .message.bot {
+            flex-direction: row;
+        }
+        
+        .message.user {
+            flex-direction: row-reverse;
+        }
+        
+        .message-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: var(--color-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 18px;
+        }
+        
+        .message.user .message-avatar {
+            background-color: var(--color-secondary);
+        }
+        
+        .message-content {
+            max-width: 75%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            line-height: 1.5;
+        }
+        
+        .message.bot .message-content {
+            background-color: white;
+            color: var(--color-text);
+        }
+        
+        .message.user .message-content {
+            background-color: var(--color-primary);
+            color: white;
+        }
+        
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .quick-reply {
+            padding: 8px 16px;
+            background-color: white;
+            border: 2px solid var(--color-primary);
+            color: var(--color-primary);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-reply:hover {
+            background-color: var(--color-primary);
+            color: white;
+        }
+        
+        .chat-input-container {
+            padding: 15px;
+            background-color: white;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .chat-input:focus {
+            border-color: var(--color-primary);
+        }
+        
+        .chat-send {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: var(--color-primary);
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .chat-send:hover {
+            background-color: var(--color-primary-dark);
+            transform: scale(1.1);
+        }
+        
+        .chat-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .typing-indicator {
+            display: none;
+            padding: 12px 16px;
+            background-color: white;
+            border-radius: 18px;
+            width: fit-content;
+        }
+        
+        .typing-indicator.show {
+            display: block;
+        }
+        
+        .typing-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--color-primary);
+            margin: 0 2px;
+            animation: typing 1.4s infinite;
+        }
+        
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 480px) {
+            .chat-window {
+                width: calc(100vw - 40px);
+                height: calc(100vh - 140px);
+                bottom: 100px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body style="padding: 20px; background-color: #f5f5f5;">
+    <div style="max-width: 800px; margin: 0 auto; background: white; padding: 3rem; border-radius: 12px;">
+        <h1 style="color: var(--color-primary-dark); margin-bottom: 1rem;">🤖 Prototype Chatbot "Sophie"</h1>
+        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem;">
+            Ceci est un prototype fonctionnel du chatbot IA "Sophie", votre assistante virtuelle spécialisée 
+            en troubles de la succion. Dans la version finale, Sophie sera connectée à l'API Claude d'Anthropic 
+            pour des réponses intelligentes et empathiques en temps réel.
+        </p>
+        
+        <div style="background-color: #fff3cd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #ff9800; margin-bottom: 2rem;">
+            <h3 style="margin-top: 0; color: #e65100;">💡 Fonctionnalités du prototype</h3>
+            <ul style="margin-bottom: 0;">
+                <li>Réponses pré-programmées pour démonstration</li>
+                <li>Boutons de réponses rapides</li>
+                <li>Interface moderne et responsive</li>
+                <li>Animation de frappe</li>
+                <li>Mémorisation du contexte de conversation</li>
+            </ul>
+        </div>
+        
+        <div style="background-color: #e8f5e9; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #4caf50;">
+            <h3 style="margin-top: 0; color: #2e7d32;">✨ Version finale avec Claude API</h3>
+            <ul style="margin-bottom: 0;">
+                <li><strong>Réponses intelligentes</strong> basées sur vos contenus</li>
+                <li><strong>Empathie</strong> et ton rassurant adapté</li>
+                <li><strong>Orientation géographique</strong> vers professionnels proches</li>
+                <li><strong>Apprentissage continu</strong> des questions fréquentes</li>
+                <li><strong>Multilingue</strong> (FR/DE/IT)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Chatbot Widget -->
+    <div id="chatbot-container">
+        <button class="chat-bubble has-notification" id="chatToggle">
+            👶
+        </button>
+        
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <div class="chat-avatar">🤱</div>
+                <div class="chat-info">
+                    <h3>Sophie</h3>
+                    <p>Sage-femme virtuelle</p>
+                </div>
+                <button class="chat-close" id="chatClose">×</button>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages seront ajoutés ici -->
+            </div>
+            
+            <div class="chat-input-container">
+                <input 
+                    type="text" 
+                    class="chat-input" 
+                    id="chatInput" 
+                    placeholder="Posez votre question..."
+                    autocomplete="off"
+                >
+                <button class="chat-send" id="chatSend">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Données de démonstration
+        const responses = {
+            'bonjour': "Bonjour ! 👋 Je suis Sophie, votre assistante virtuelle spécialisée en troubles de la succion. Je suis là pour vous aider et vous orienter. Comment puis-je vous aider aujourd'hui ?",
+            'frein': "Je comprends votre préoccupation concernant un possible frein de langue. Pouvez-vous me dire si vous observez certains signes ? Par exemple : est-ce que la langue de votre bébé forme un cœur quand il pleure ?",
+            'douleur': "Je suis vraiment désolée d'apprendre que l'allaitement est douloureux. C'est difficile et vous n'êtes pas seule. Des douleurs persistantes peuvent indiquer un problème de prise du sein, parfois lié à un frein restrictif. Depuis combien de temps allaitez-vous ?",
+            'lausanne': "Parfait ! Dans la région lausannoise, nous avons plusieurs professionnels excellents spécialisés en troubles de la succion. Je vous recommande de commencer par une consultante en lactation IBCLC qui pourra évaluer la situation. Souhaitez-vous que je vous donne leurs coordonnées ?",
+            'oui': "Excellent ! Voici les professionnels disponibles près de chez vous. N'hésitez pas à les contacter rapidement. Avez-vous d'autres questions ?",
+            'merci': "Je vous en prie ! 💙 N'oubliez pas : vous faites de votre mieux et demander de l'aide est la meilleure chose que vous puissiez faire. Prenez soin de vous et de votre bébé. Je reste disponible si vous avez d'autres questions !",
+            'default': "Je comprends votre question. Dans la version complète avec l'IA, je pourrai vous donner une réponse précise et personnalisée. Pour l'instant, je vous suggère de consulter notre FAQ ou de contacter directement un professionnel de notre réseau."
+        };
+        
+        const quickReplies = {
+            initial: [
+                "J'ai des douleurs en allaitant",
+                "Je pense que mon bébé a un frein de langue",
+                "Où trouver un professionnel ?",
+                "Questions sur la frénectomie"
+            ],
+            afterFrein: [
+                "Quels sont les signes ?",
+                "Comment être sûr ?",
+                "Besoin d'une consultation"
+            ],
+            afterLausanne: [
+                "Oui, donnez-moi les coordonnées",
+                "C'est urgent ?",
+                "Quels sont les tarifs ?"
+            ]
+        };
+        
+        // Variables
+        let isOpen = false;
+        let conversationContext = [];
+        
+        // Éléments DOM
+        const chatToggle = document.getElementById('chatToggle');
+        const chatWindow = document.getElementById('chatWindow');
+        const chatClose = document.getElementById('chatClose');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const chatSend = document.getElementById('chatSend');
+        
+        // Toggle chat
+        chatToggle.addEventListener('click', () => {
+            isOpen = !isOpen;
+            if (isOpen) {
+                chatWindow.classList.add('open');
+                chatToggle.classList.remove('has-notification');
+                if (chatMessages.children.length === 0) {
+                    setTimeout(() => addBotMessage(responses.bonjour, quickReplies.initial), 500);
+                }
+            } else {
+                chatWindow.classList.remove('open');
+            }
+        });
+        
+        chatClose.addEventListener('click', () => {
+            isOpen = false;
+            chatWindow.classList.remove('open');
+        });
+        
+        // Send message
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+            
+            addUserMessage(message);
+            chatInput.value = '';
+            
+            // Simulate typing
+            showTyping();
+            
+            setTimeout(() => {
+                hideTyping();
+                const response = getResponse(message.toLowerCase());
+                addBotMessage(response.text, response.replies);
+            }, 1500);
+        }
+        
+        chatSend.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+        
+        // Get response based on keywords
+        function getResponse(message) {
+            conversationContext.push(message);
+            
+            if (message.includes('bonjour') || message.includes('salut') || message.includes('hello')) {
+                return { text: responses.bonjour, replies: quickReplies.initial };
+            } else if (message.includes('frein') || message.includes('langue')) {
+                return { text: responses.frein, replies: quickReplies.afterFrein };
+            } else if (message.includes('douleur') || message.includes('mal') || message.includes('souffr')) {
+                return { text: responses.douleur, replies: null };
+            } else if (message.includes('lausanne') || message.includes('vaud')) {
+                return { text: responses.lausanne, replies: quickReplies.afterLausanne };
+            } else if (message.includes('oui') || message.includes('ok') || message.includes('accord')) {
+                return { text: responses.oui, replies: null };
+            } else if (message.includes('merci')) {
+                return { text: responses.merci, replies: null };
+            } else {
+                return { text: responses.default, replies: quickReplies.initial };
+            }
+        }
+        
+        // Add messages
+        function addUserMessage(text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user';
+            messageDiv.innerHTML = `
+                <div class="message-avatar">👤</div>
+                <div class="message-content">${escapeHtml(text)}</div>
+            `;
+            chatMessages.appendChild(messageDiv);
+            scrollToBottom();
+        }
+        
+        function addBotMessage(text, replies = null) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message bot';
+            
+            let repliesHTML = '';
+            if (replies) {
+                repliesHTML = '<div class="quick-replies">';
+                replies.forEach(reply => {
+                    repliesHTML += `<button class="quick-reply" onclick="handleQuickReply('${reply}')">${reply}</button>`;
+                });
+                repliesHTML += '</div>';
+            }
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">🤱</div>
+                <div class="message-content">${escapeHtml(text)}${repliesHTML}</div>
+            `;
+            chatMessages.appendChild(messageDiv);
+            scrollToBottom();
+        }
+        
+        function showTyping() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message bot';
+            typingDiv.id = 'typing';
+            typingDiv.innerHTML = `
+                <div class="message-avatar">🤱</div>
+                <div class="typing-indicator show">
+                    <span class="typing-dot"></span>
+                    <span class="typing-dot"></span>
+                    <span class="typing-dot"></span>
+                </div>
+            `;
+            chatMessages.appendChild(typingDiv);
+            scrollToBottom();
+        }
+        
+        function hideTyping() {
+            const typing = document.getElementById('typing');
+            if (typing) typing.remove();
+        }
+        
+        function scrollToBottom() {
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // Handle quick replies
+        window.handleQuickReply = function(reply) {
+            chatInput.value = reply;
+            sendMessage();
+        };
+        
+        // Auto-open after 3 seconds for demo
+        setTimeout(() => {
+            if (!isOpen) {
+                chatToggle.classList.add('has-notification');
+            }
+        }, 3000);
+    </script>
+</body>
+</html>

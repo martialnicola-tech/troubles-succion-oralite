@@ -1,0 +1,15 @@
+# robots.txt pour troubles-succion-oralite.ch
+
+User-agent: *
+Allow: /
+
+# Pages à ne pas indexer
+Disallow: /admin/
+Disallow: /api/
+Disallow: /inscription-success.html
+
+# Sitemap
+Sitemap: https://www.troubles-succion-oralite.ch/sitemap.xml
+
+# Temps de crawl pour éviter la surcharge
+Crawl-delay: 1

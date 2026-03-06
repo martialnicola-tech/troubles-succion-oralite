@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription Professionnels - Troubles de la Succion</title>
+    <meta name="description" content="Rejoignez notre annuaire de professionnels spécialisés dans les troubles de la succion et l'oralité.">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--color-text);
+        }
+        
+        .form-label.required::after {
+            content: " *";
+            color: #d32f2f;
+        }
+        
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-family: var(--font-primary);
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+        
+        .form-input.error {
+            border-color: #d32f2f;
+        }
+        
+        .form-error {
+            color: #d32f2f;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        .form-error.show {
+            display: block;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .checkbox-input {
+            margin-top: 0.25rem;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .checkbox-label {
+            flex: 1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .price-info {
+            background-color: var(--color-primary-light);
+            padding: 1.5rem;
+            border-radius: var(--radius-large);
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .price-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-period {
+            color: var(--color-text-light);
+            font-size: 1.1rem;
+        }
+        
+        .benefits-list {
+            background-color: var(--color-white);
+            padding: 2rem;
+            border-radius: var(--radius-large);
+            margin: 2rem 0;
+        }
+        
+        .benefits-list h3 {
+            color: var(--color-primary-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .benefits-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .benefits-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .benefits-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            background-color: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-submit:hover:not(:disabled) {
+            background-color: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .stripe-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: var(--radius);
+        }
+        
+        .stripe-info img {
+            height: 24px;
+        }
+        
+        .verification-notice {
+            background-color: #fff3cd;
+            border-left: 4px solid #ff9800;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin: 2rem 0;
+        }
+        
+        .verification-notice h4 {
+            color: #e65100;
+            margin-bottom: 0.75rem;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .step-indicator::before {
+            content: "";
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--color-border);
+            z-index: 0;
+        }
+        
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--color-border);
+            color: var(--color-text-light);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step.active .step-number {
+            background-color: var(--color-primary);
+            color: white;
+        }
+        
+        .step.completed .step-number {
+            background-color: var(--color-primary-dark);
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+        }
+        
+        .step.active .step-label {
+            color: var(--color-text);
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+        <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Troubles de la Succion" class="logo-img">
+                </a>
+            </div>
+            <nav class="nav">
+                <button class="nav-toggle">☰</button>
+                <ul class="nav-menu">
+                    <li><a href="pour-qui.html">Pour qui ?</a></li>
+                    <li><a href="troubles.html">Troubles</a></li>
+                    <li class="has-dropdown">
+                        <a href="frein-langue.html">Frein langue</a>
+                        <ul class="dropdown">
+                            <li><a href="frein-levre.html">Frein de lèvre</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="on-coupe-ou-pas.html">On coupe ou pas ?</a></li>
+                    <li><a href="frenectomie.html">Frénectomie</a></li>
+                    <li><a href="exercices.html">Exercices</a></li>
+                    <li class="has-dropdown">
+                        <a href="equipe.html">Équipe</a>
+                        <ul class="dropdown">
+                            <li><a href="equipe-osteopathes.html">Ostéopathes</a></li>
+                            <li><a href="equipe-sages-femmes.html">Sages-Femmes</a></li>
+                            <li><a href="equipe-ibclc.html">IBCLC</a></li>
+                            <li><a href="equipe-lactation.html">Consultantes</a></li>
+                            <li><a href="equipe-logopedistes.html">Logopédistes</a></li>
+                            <li><a href="equipe-orl-dentistes.html">ORL & Dentistes</a></li>
+                            <li><a href="equipe-physiotherapeutes.html">Physiothérapeutes</a></li>
+                            <li><a href="equipe-nutrition.html">Nutritionnistes</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="annuaire.html">Annuaire</a></li>
+                    <li><a href="pro.html" class="active">Pro</a></li>
+                    <li class="has-dropdown">
+                        <a href="bases-scientifiques.html">Bases Scientifiques</a>
+                        <ul class="dropdown">
+                            <li><a href="references.html">Références</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+        <section class="hero" style="background-image: url('images/hero/inscription.jpg'); background-color: var(--turquoise);">
+        <div class="hero-content">
+                <h1 class="hero-title">Inscription Professionnels</h1>
+                <p class="hero-subtitle">Rejoignez notre annuaire spécialisé</p>
+            </div>
+    </section>
+
+    <!-- Main Content -->
+        <!-- Introduction -->
+        <section class="section">
+            <div class="container">
+                <div class="form-container">
+                    <!-- Step Indicator -->
+                    <div class="step-indicator">
+                        <div class="step active" id="step-1">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Informations</div>
+                        </div>
+                        <div class="step" id="step-2">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Vérification</div>
+                        </div>
+                        <div class="step" id="step-3">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Paiement</div>
+                        </div>
+                    </div>
+
+                    <!-- Price Info -->
+                    <div class="price-info">
+                        <div class="price-amount">30 CHF</div>
+                        <div class="price-period">par année / renouvelable automatiquement</div>
+                    </div>
+
+                    <!-- Benefits -->
+                    <div class="benefits-list">
+                        <h3>Avantages de l'inscription</h3>
+                        <ul>
+                            <li>Visibilité auprès des parents et professionnels de santé</li>
+                            <li>Profil professionnel complet avec vos coordonnées</li>
+                            <li>Lien vers votre site internet (avec échange de lien requis)</li>
+                            <li>Référencement dans l'annuaire par spécialité et région</li>
+                            <li>Renouvellement automatique annuel</li>
+                        </ul>
+                    </div>
+
+                    <!-- Verification Notice -->
+                    <div class="verification-notice">
+                        <h4>📋 Condition obligatoire : Échange de lien</h4>
+                        <p>Pour afficher votre site internet dans votre profil, vous devez obligatoirement ajouter un lien vers <strong>www.troubles-succion-oralite.ch</strong> sur votre site web.</p>
+                        <p class="mt-small">Notre équipe vérifiera la présence de ce lien avant d'activer le vôtre. Le lien peut être placé dans votre page "Ressources", "Partenaires" ou pied de page.</p>
+                    </div>
+
+                    <!-- Registration Form -->
+                    <form id="registrationForm">
+                        <h3 style="color: var(--color-primary-dark); margin-bottom: 2rem;">Vos informations professionnelles</h3>
+
+                        <!-- Spécialité -->
+                        <div class="form-group">
+                            <label for="specialite" class="form-label required">Spécialité</label>
+                            <select id="specialite" name="specialite" class="form-select" required>
+                                <option value="">-- Sélectionnez votre spécialité --</option>
+                                <option value="osteopathe">Ostéopathe</option>
+                                <option value="sage-femme">Sage-Femme</option>
+                                <option value="ibclc">Consultante en lactation IBCLC</option>
+                                <option value="consultante-lactation">Consultante en lactation</option>
+                                <option value="logopediste">Logopédiste</option>
+                                <option value="orl">ORL</option>
+                                <option value="dentiste">Dentiste</option>
+                                <option value="physiotherapeute">Physiothérapeute</option>
+                                <option value="nutritionniste">Nutritionniste</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                            <span class="form-error" id="error-specialite">Veuillez sélectionner votre spécialité</span>
+                        </div>
+
+                        <!-- Prénom -->
+                        <div class="form-group">
+                            <label for="prenom" class="form-label required">Prénom</label>
+                            <input type="text" id="prenom" name="prenom" class="form-input" required>
+                            <span class="form-error" id="error-prenom">Veuillez entrer votre prénom</span>
+                        </div>
+
+                        <!-- Nom -->
+                        <div class="form-group">
+                            <label for="nom" class="form-label required">Nom</label>
+                            <input type="text" id="nom" name="nom" class="form-input" required>
+                            <span class="form-error" id="error-nom">Veuillez entrer votre nom</span>
+                        </div>
+
+                        <!-- Adresse du cabinet -->
+                        <div class="form-group">
+                            <label for="adresse" class="form-label required">Adresse du cabinet</label>
+                            <input type="text" id="adresse" name="adresse" class="form-input" placeholder="Rue et numéro" required>
+                            <span class="form-error" id="error-adresse">Veuillez entrer l'adresse de votre cabinet</span>
+                        </div>
+
+                        <!-- Code postal -->
+                        <div class="form-group">
+                            <label for="cp" class="form-label required">Code postal</label>
+                            <input type="text" id="cp" name="cp" class="form-input" pattern="[0-9]{4}" placeholder="1234" required>
+                            <span class="form-error" id="error-cp">Veuillez entrer un code postal valide (4 chiffres)</span>
+                        </div>
+
+                        <!-- Lieu -->
+                        <div class="form-group">
+                            <label for="lieu" class="form-label required">Lieu</label>
+                            <input type="text" id="lieu" name="lieu" class="form-input" placeholder="Ville" required>
+                            <span class="form-error" id="error-lieu">Veuillez entrer la ville</span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="email" class="form-label required">Email professionnel</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="contact@exemple.ch" required>
+                            <span class="form-error" id="error-email">Veuillez entrer une adresse email valide</span>
+                        </div>
+
+                        <!-- Téléphone -->
+                        <div class="form-group">
+                            <label for="telephone" class="form-label">Téléphone</label>
+                            <input type="tel" id="telephone" name="telephone" class="form-input" placeholder="+41 XX XXX XX XX">
+                        </div>
+
+                        <!-- Site internet -->
+                        <div class="form-group">
+                            <label for="siteWeb" class="form-label">Site internet</label>
+                            <input type="url" id="siteWeb" name="siteWeb" class="form-input" placeholder="https://www.votre-site.ch">
+                            <small style="color: var(--color-text-light); font-size: 0.875rem;">
+                                ⚠️ Rappel : Vous devez ajouter un lien vers www.troubles-succion-oralite.ch sur votre site pour que votre lien soit activé.
+                            </small>
+                            <span class="form-error" id="error-siteWeb">Veuillez entrer une URL valide (ex: https://www.exemple.ch)</span>
+                        </div>
+
+                        <!-- Conditions -->
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="acceptConditions" name="acceptConditions" class="checkbox-input" required>
+                                <label for="acceptConditions" class="checkbox-label">
+                                    J'accepte les conditions d'utilisation et je m'engage à maintenir un lien vers www.troubles-succion-oralite.ch sur mon site web si j'en fournis l'URL. *
+                                </label>
+                            </div>
+                            <span class="form-error" id="error-acceptConditions">Vous devez accepter les conditions</span>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="acceptPaiement" name="acceptPaiement" class="checkbox-input" required>
+                                <label for="acceptPaiement" class="checkbox-label">
+                                    Je comprends que l'inscription coûte 30 CHF par an et sera renouvelée automatiquement. Je peux annuler à tout moment. *
+                                </label>
+                            </div>
+                            <span class="form-error" id="error-acceptPaiement">Vous devez accepter les conditions de paiement</span>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn-submit" id="submitBtn">
+                            Continuer vers le paiement
+                        </button>
+
+                        <!-- Stripe Info -->
+                        <div class="stripe-info">
+                            <span>Paiement sécurisé par</span>
+                            <svg height="24" viewBox="0 0 60 25" width="60" xmlns="http://www.w3.org/2000/svg"><title>Stripe logo</title><path d="m59.64 14.28h-8.06c.19 1.93 1.6 2.55 3.2 2.55 1.64 0 2.96-.37 4.05-.95v3.32a8.33 8.33 0 0 1 -4.56 1.1c-4.01 0-6.83-2.5-6.83-7.48 0-4.19 2.39-7.52 6.3-7.52 3.92 0 5.96 3.28 5.96 7.5 0 .4-.04 1.26-.06 1.48zm-5.92-5.62c-1.03 0-2.17.73-2.17 2.58h4.25c0-1.85-1.07-2.58-2.08-2.58zm-40.95-2.03c-1.03 0-1.63.42-1.63 1.24 0 .82.6 1.24 1.63 1.24h3.12c2.58 0 4.05 1.82 4.05 4.3 0 3.01-1.89 5.25-5.42 5.25-1.55 0-3.36-.46-4.67-1.03v-3.52c1.38.68 3.22 1.13 4.67 1.13 1.23 0 1.75-.53 1.75-1.33 0-.8-.52-1.33-1.75-1.33h-3.12c-2.63 0-4.3-1.82-4.3-4.25 0-3.01 1.89-5.25 5.26-5.25 1.61 0 3.4.46 4.64 1.03v3.44c-1.28-.68-3.14-1.06-4.23-1.06zm29.9 2.08c-1.03 0-1.91.84-1.91 2.55v3.52c0 1.7.88 2.54 1.91 2.54 1.03 0 1.9-.84 1.9-2.54v-3.52c0-1.7-.87-2.55-1.9-2.55zm-9.06-2.08c-1.03 0-1.63.42-1.63 1.24 0 .82.6 1.24 1.63 1.24h3.12c2.58 0 4.05 1.82 4.05 4.3 0 3.01-1.89 5.25-5.42 5.25-1.55 0-3.36-.46-4.67-1.03v-3.52c1.38.68 3.22 1.13 4.67 1.13 1.23 0 1.75-.53 1.75-1.33 0-.8-.52-1.33-1.75-1.33h-3.12c-2.63 0-4.3-1.82-4.3-4.25 0-3.01 1.89-5.25 5.26-5.25 1.61 0 3.4.46 4.64 1.03v3.44c-1.28-.68-3.14-1.06-4.23-1.06zm24.49-2.04h4.68v13.88h-4.68zm-39.93 0h5.21l2.88 5.62 2.91-5.62h5.06l-5.67 10.82-5.69 11.06h-5.21l2.69-5.22zm-6.28 0h4.68v13.88h-4.68z" fill="#6772e5"/></svg>
+                            <span style="color: var(--color-text-light);">• TWINT accepté</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    <!-- Footer -->
+            <footer class="footer">
+        <div class="footer-content">
+            <p>Copyright ©2026 | Toute reproduction même partielle est interdite. | <a href="contact.html">Contact</a> | Site réalisé par @mndesign</p>
+        </div>
+        <div class="footer-links">
+            <a href="#">Mentions Légale</a>
+            <a href="#">Politiques de Confidentialité</a>
+            <a href="#">Conditions Générales</a>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

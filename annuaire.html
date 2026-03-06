@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annuaire des Professionnels - Suisse Romande</title>
+    <meta name="description" content="Trouvez un professionnel spécialisé en troubles de la succion près de chez vous en Suisse romande.">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .search-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .search-filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .filter-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        .filter-group select,
+        .filter-group input {
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            transition: border-color 0.3s;
+        }
+        
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: var(--turquoise);
+        }
+        
+        .search-btn {
+            padding: 1rem 2rem;
+            background: var(--turquoise);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .search-btn:hover {
+            background: var(--turquoise-dark);
+            transform: translateY(-2px);
+        }
+        
+        .results-count {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+        
+        .pro-card-detailed {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .pro-card-detailed:hover {
+            box-shadow: 0 4px 16px rgba(78, 205, 196, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .pro-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .pro-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.3rem;
+        }
+        
+        .pro-specialty {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--turquoise-light);
+            color: var(--turquoise-dark);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .pro-canton {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        .pro-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .pro-info-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .pro-info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 0.95rem;
+        }
+        
+        .pro-info-item svg {
+            width: 20px;
+            height: 20px;
+            color: var(--turquoise);
+            flex-shrink: 0;
+        }
+        
+        .pro-website {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.6rem 1.5rem;
+            background: var(--turquoise);
+            color: white;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .pro-website:hover {
+            background: var(--turquoise-dark);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            background: #f8f8f8;
+            border-radius: 12px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Troubles de la Succion" class="logo-img">
+                </a>
+            </div>
+            <nav class="nav">
+                <button class="nav-toggle">☰</button>
+                <ul class="nav-menu">
+                    <li><a href="pour-qui.html">Pour qui ?</a></li>
+                    <li><a href="troubles.html">Troubles</a></li>
+                    <li class="has-dropdown">
+                        <a href="frein-langue.html">Frein langue</a>
+                        <ul class="dropdown">
+                            <li><a href="frein-levre.html">Frein de lèvre</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="on-coupe-ou-pas.html">On coupe ou pas ?</a></li>
+                    <li><a href="frenectomie.html">Frénectomie</a></li>
+                    <li><a href="exercices.html">Exercices</a></li>
+                    <li class="has-dropdown">
+                        <a href="equipe.html">Équipe</a>
+                        <ul class="dropdown">
+                            <li><a href="equipe-osteopathes.html">Ostéopathes</a></li>
+                            <li><a href="equipe-sages-femmes.html">Sages-Femmes</a></li>
+                            <li><a href="equipe-ibclc.html">IBCLC</a></li>
+                            <li><a href="equipe-lactation.html">Consultantes</a></li>
+                            <li><a href="equipe-logopedistes.html">Logopédistes</a></li>
+                            <li><a href="equipe-orl-dentistes.html">ORL & Dentistes</a></li>
+                            <li><a href="equipe-physiotherapeutes.html">Physiothérapeutes</a></li>
+                            <li><a href="equipe-nutrition.html">Nutritionnistes</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="annuaire.html" class="active">Annuaire</a></li>
+                    <li><a href="pro.html">Pro</a></li>
+                    <li class="has-dropdown">
+                        <a href="bases-scientifiques.html">Bases Scientifiques</a>
+                        <ul class="dropdown">
+                            <li><a href="references.html">Références</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" style="background-image: url('images/hero/annuaire.jpg'); background-color: var(--turquoise);">
+        <div class="hero-content">
+            <h1 class="hero-title">Annuaire des Professionnels</h1>
+            <p class="hero-subtitle">Trouvez un spécialiste près de chez vous</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <!-- Boîte de recherche -->
+            <div class="search-box">
+                <h2 style="margin-bottom: 1.5rem; color: var(--text);">🔍 Rechercher un professionnel</h2>
+                
+                <div class="search-filters">
+                    <div class="filter-group">
+                        <label for="canton">Canton</label>
+                        <select id="canton" name="canton">
+                            <option value="">Tous les cantons</option>
+                            <option value="VD">Vaud (VD)</option>
+                            <option value="VS">Valais (VS)</option>
+                            <option value="GE">Genève (GE)</option>
+                            <option value="FR">Fribourg (FR)</option>
+                            <option value="NE">Neuchâtel (NE)</option>
+                            <option value="JU">Jura (JU)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="specialite">Spécialité</label>
+                        <select id="specialite" name="specialite">
+                            <option value="">Toutes les spécialités</option>
+                            <option value="osteopathe">Ostéopathe</option>
+                            <option value="sage-femme">Sage-Femme</option>
+                            <option value="ibclc">Consultante IBCLC</option>
+                            <option value="consultante-lactation">Consultante Lactation</option>
+                            <option value="logopediste">Logopédiste</option>
+                            <option value="orl">ORL</option>
+                            <option value="dentiste">Dentiste</option>
+                            <option value="physiotherapeute">Physiothérapeute</option>
+                            <option value="nutritionniste">Nutritionniste</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="ville">Ville ou NPA</label>
+                        <input type="text" id="ville" name="ville" placeholder="Ex: Lausanne ou 1000">
+                    </div>
+                </div>
+                
+                <button class="search-btn" onclick="searchProfessionals()">Rechercher</button>
+            </div>
+
+            <!-- Résultats -->
+            <div id="results-container">
+                <div class="loading">Chargement des professionnels...</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-turquoise">
+        <div class="container text-center">
+            <h2 style="margin-bottom: 1rem;">Vous êtes professionnel de santé ?</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">Rejoignez notre annuaire et gagnez en visibilité</p>
+            <a href="pro.html" class="btn" style="background: white; color: var(--turquoise-dark);">Inscription Pro - 30 CHF/an</a>
+        </div>
+    </section>
+
+        <footer class="footer">
+        <div class="footer-content">
+            <p>Copyright ©2026 | Toute reproduction même partielle est interdite. | <a href="contact.html">Contact</a> | Site réalisé par @mndesign</p>
+        </div>
+        <div class="footer-links">
+            <a href="#">Mentions Légale</a>
+            <a href="#">Politiques de Confidentialité</a>
+            <a href="#">Conditions Générales</a>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
