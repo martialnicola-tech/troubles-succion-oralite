@@ -326,20 +326,17 @@ a { text-decoration: none; color: inherit; }
 .nav-menu { gap: 0.8rem !important; }
 .nav-menu > li > a { font-size: 0.82rem !important; letter-spacing: -0.01em; }
 
-/* DROPDOWN — caché par défaut, affiché au survol */
-.nav-menu .dropdown { display: none !important; }
-.nav-menu li.has-dropdown:hover .dropdown { display: flex !important; }
-
 /* DROPDOWN NAVIGATION */
-.nav-menu li.has-dropdown { position: relative; }
+.nav-menu > li.has-dropdown { position: relative; }
 
-.nav-menu li.has-dropdown > a::after {
+.nav-menu > li.has-dropdown > a::after {
     content: ' ▾';
     font-size: 0.7em;
     opacity: 0.75;
 }
 
-.nav-menu .dropdown {
+/* Dropdown — caché par défaut (sélecteurs directs, sans !important) */
+.nav-menu > li > ul.dropdown {
     display: none;
     position: absolute;
     top: calc(100% + 8px);
@@ -356,9 +353,12 @@ a { text-decoration: none; color: inherit; }
     box-shadow: 0 6px 20px rgba(0,0,0,0.25);
 }
 
-.nav-menu li.has-dropdown:hover .dropdown { display: flex; }
+/* Affiché au survol (desktop) */
+.nav-menu > li.has-dropdown:hover > ul.dropdown {
+    display: flex;
+}
 
-.nav-menu .dropdown li a {
+.nav-menu > li > ul.dropdown > li > a {
     display: block;
     padding: 0.55rem 1.1rem;
     white-space: nowrap;
@@ -368,7 +368,7 @@ a { text-decoration: none; color: inherit; }
     border-bottom: none !important;
 }
 
-.nav-menu .dropdown li a:hover {
+.nav-menu > li > ul.dropdown > li > a:hover {
     background: rgba(255,255,255,0.12);
     opacity: 1 !important;
 }
@@ -409,7 +409,15 @@ a { text-decoration: none; color: inherit; }
 .mt-small { margin-top: 0.5rem; }
 
 @media (max-width: 768px) {
-    .nav-menu .dropdown { position: static; background: rgba(255,255,255,0.1); box-shadow: none; border-radius: 0; display: none; }
-    .nav-menu li.has-dropdown.open .dropdown { display: flex; }
+    /* Dropdown mobile — statique, caché par défaut */
+    .nav-menu > li > ul.dropdown {
+        position: static;
+        background: rgba(255,255,255,0.1);
+        box-shadow: none;
+        border-radius: 0;
+        display: none;
+    }
+    /* Affiché quand JS ajoute la classe .open */
+    .nav-menu > li.has-dropdown.open > ul.dropdown { display: flex; }
     .cards-grid, .symptom-cards { grid-template-columns: 1fr; }
 }
