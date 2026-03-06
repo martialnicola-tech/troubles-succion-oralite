@@ -3,181 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Annuaire des Professionnels - Suisse Romande</title>
-    <meta name="description" content="Trouvez un professionnel spécialisé en troubles de la succion près de chez vous en Suisse romande.">
+    <title>Annuaire des Professionnels | Troubles de la Succion</title>
+    <meta name="description" content="Annuaire des professionnels de santé spécialisés dans les troubles de la succion, l'oralité et les freins restrictifs en Suisse romande.">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .search-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            margin-bottom: 3rem;
-        }
-        
-        .search-filters {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .filter-group label {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-        
-        .filter-group select,
-        .filter-group input {
-            padding: 0.8rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            background: white;
-            transition: border-color 0.3s;
-        }
-        
-        .filter-group select:focus,
-        .filter-group input:focus {
-            outline: none;
-            border-color: var(--turquoise);
-        }
-        
-        .search-btn {
-            padding: 1rem 2rem;
-            background: var(--turquoise);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-        }
-        
-        .search-btn:hover {
-            background: var(--turquoise-dark);
-            transform: translateY(-2px);
-        }
-        
-        .results-count {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            margin-bottom: 2rem;
-        }
-        
-        .pro-card-detailed {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            margin-bottom: 1.5rem;
-            transition: all 0.3s;
-        }
-        
-        .pro-card-detailed:hover {
-            box-shadow: 0 4px 16px rgba(78, 205, 196, 0.3);
-            transform: translateY(-2px);
-        }
-        
-        .pro-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        
-        .pro-name {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text);
-            margin-bottom: 0.3rem;
-        }
-        
-        .pro-specialty {
-            display: inline-block;
-            padding: 0.3rem 1rem;
-            background: var(--turquoise-light);
-            color: var(--turquoise-dark);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        
-        .pro-canton {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            background: #e8f5e9;
-            color: #2e7d32;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-left: 0.5rem;
-        }
-        
-        .pro-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        
-        .pro-info-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        
-        .pro-info-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-size: 0.95rem;
-        }
-        
-        .pro-info-item svg {
-            width: 20px;
-            height: 20px;
-            color: var(--turquoise);
-            flex-shrink: 0;
-        }
-        
-        .pro-website {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.6rem 1.5rem;
-            background: var(--turquoise);
-            color: white;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-        
-        .pro-website:hover {
-            background: var(--turquoise-dark);
-        }
-        
-        .no-results {
-            text-align: center;
-            padding: 3rem;
-            background: #f8f8f8;
-            border-radius: 12px;
-        }
-        
-        .loading {
-            text-align: center;
-            padding: 3rem;
-            font-size: 1.2rem;
-            color: var(--text-light);
-        }
+        .annuaire-filters { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2.5rem; }
+        .filter-btn { padding: 0.5rem 1.25rem; border: 2px solid var(--turquoise); background: white; color: var(--turquoise); border-radius: 2rem; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: all 0.2s; }
+        .filter-btn:hover, .filter-btn.active { background: var(--turquoise); color: white; }
+        .annuaire-section { margin-bottom: 3rem; }
+        .annuaire-section-title { font-size: 1.4rem; font-weight: 700; color: var(--turquoise); border-bottom: 2px solid var(--turquoise); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        .annuaire-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+        .annuaire-card { background: white; border-radius: 10px; padding: 1.25rem 1.5rem; border: 1px solid #e8e8e8; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: box-shadow 0.2s; }
+        .annuaire-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+        .annuaire-name { font-weight: 700; font-size: 1rem; color: #222; margin-bottom: 0.35rem; }
+        .annuaire-specialty { font-size: 0.8rem; font-weight: 600; color: white; background: var(--turquoise); display: inline-block; padding: 0.15rem 0.6rem; border-radius: 1rem; margin-bottom: 0.6rem; }
+        .annuaire-info { font-size: 0.88rem; color: #555; line-height: 1.7; }
+        .annuaire-info a { color: var(--turquoise); text-decoration: underline; }
+        .annuaire-phone { font-weight: 600; color: #333; }
+        @media (max-width: 900px) { .annuaire-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .annuaire-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -190,7 +34,7 @@
             </div>
             <nav class="nav">
                 <button class="nav-toggle">☰</button>
-                                <ul class="nav-menu">
+                <ul class="nav-menu">
                     <li><a href="pour-qui.html">Pour qui ?</a></li>
                     <li><a href="troubles.html">Troubles</a></li>
                     <li class="has-dropdown">
@@ -220,35 +64,18 @@
                             <li><a href="equipe-nutrition.html">Nutrition</a></li>
                         </ul>
                     </li>
-                    <li><a href="annuaire.html">Annuaire</a></li>
-                    <li><a href="pro.html">Pro</a></li>
-                    <li class="has-dropdown">
-                        <a href="bases-scientifiques.html">Bases Scientifiques</a>
-                        <ul class="dropdown">
-                            <li><a href="references.html">Références</a></li>
-                            <li><a href="faq.html">FAQ</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                    </li>
-                    <li><a href="on-coupe-ou-pas.html">On coupe ou pas ?</a></li>
-                    <li><a href="frenectomie.html">Frénectomie</a></li>
-                    <li><a href="exercices.html">Exercices</a></li>
-                    <li class="has-dropdown">
-                        <a href="equipe.html">Équipe</a>
-                        <ul class="dropdown">
-                            <li><a href="equipe-osteopathes.html">Ostéopathes</a></li>
-                            <li><a href="equipe-sages-femmes.html">Sages-Femmes</a></li>
-                            <li><a href="equipe-ibclc.html">IBCLC</a></li>
-                            <li><a href="equipe-lactation.html">Consultantes</a></li>
-                            <li><a href="equipe-logopedistes.html">Logopédistes</a></li>
-                            <li><a href="equipe-orl-dentistes.html">ORL & Dentistes</a></li>
-                            <li><a href="equipe-physiotherapeutes.html">Physiothérapeutes</a></li>
-                            <li><a href="equipe-nutrition.html">Nutritionnistes</a></li>
-                        </ul>
-                    </li>
                     <li><a href="annuaire.html" class="active">Annuaire</a></li>
+                    <li class="has-dropdown">
+                        <a href="#">Cantons</a>
+                        <ul class="dropdown">
+                            <li><a href="cantons/vaud.html">Vaud</a></li>
+                            <li><a href="cantons/geneve.html">Genève</a></li>
+                            <li><a href="cantons/valais.html">Valais</a></li>
+                            <li><a href="cantons/fribourg.html">Fribourg</a></li>
+                            <li><a href="cantons/jura.html">Jura</a></li>
+                            <li><a href="cantons/neuchatel.html">Neuchâtel</a></li>
+                        </ul>
+                    </li>
                     <li><a href="pro.html">Pro</a></li>
                     <li class="has-dropdown">
                         <a href="bases-scientifiques.html">Bases Scientifiques</a>
@@ -263,74 +90,449 @@
         </div>
     </header>
 
+    <!-- Hero -->
     <section class="hero" style="background-image: url('images/hero/annuaire.jpg'); background-color: var(--turquoise);">
         <div class="hero-content">
-            <h1 class="hero-title">Annuaire des Professionnels</h1>
-            <p class="hero-subtitle">Trouvez un spécialiste près de chez vous</p>
+            <h1 class="hero-title">Annuaire des professionnels</h1>
+            <p class="hero-subtitle">Spécialistes en succion, oralité et freins restrictifs — Suisse romande</p>
         </div>
     </section>
 
+    <!-- Annuaire -->
     <section class="section">
         <div class="container">
-            <!-- Boîte de recherche -->
-            <div class="search-box">
-                <h2 style="margin-bottom: 1.5rem; color: var(--text);">🔍 Rechercher un professionnel</h2>
-                
-                <div class="search-filters">
-                    <div class="filter-group">
-                        <label for="canton">Canton</label>
-                        <select id="canton" name="canton">
-                            <option value="">Tous les cantons</option>
-                            <option value="VD">Vaud (VD)</option>
-                            <option value="VS">Valais (VS)</option>
-                            <option value="GE">Genève (GE)</option>
-                            <option value="FR">Fribourg (FR)</option>
-                            <option value="NE">Neuchâtel (NE)</option>
-                            <option value="JU">Jura (JU)</option>
-                        </select>
+
+            <!-- Filtres -->
+            <div class="annuaire-filters">
+                <button class="filter-btn active" onclick="filterAll(this)">Tous</button>
+                <button class="filter-btn" onclick="filterSection('osteopathes', this)">Ostéopathes</button>
+                <button class="filter-btn" onclick="filterSection('sages-femmes', this)">Sages-Femmes</button>
+                <button class="filter-btn" onclick="filterSection('ibclc', this)">IBCLC</button>
+                <button class="filter-btn" onclick="filterSection('lactation', this)">Consultantes lactation</button>
+                <button class="filter-btn" onclick="filterSection('logopedistes', this)">Logopédistes</button>
+                <button class="filter-btn" onclick="filterSection('orl', this)">ORL-Dentistes</button>
+                <button class="filter-btn" onclick="filterSection('physio', this)">Physiothérapeutes</button>
+                <button class="filter-btn" onclick="filterSection('nutrition', this)">Nutrition</button>
+            </div>
+
+            <!-- Ostéopathes -->
+            <div class="annuaire-section" id="section-osteopathes">
+                <h2 class="annuaire-section-title">🦴 Ostéopathes</h2>
+                <div class="annuaire-grid">
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Christelle Nicola Avanthay</div>
+                        <span class="annuaire-specialty">Ostéopathe</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 764 90 83</div>
+                            <div>Chemin de Chanrion 68<br>1893 Muraz</div>
+                            <div><a href="https://www.osteobebe.ch" target="_blank">www.osteobebe.ch</a></div>
+                        </div>
                     </div>
-                    
-                    <div class="filter-group">
-                        <label for="specialite">Spécialité</label>
-                        <select id="specialite" name="specialite">
-                            <option value="">Toutes les spécialités</option>
-                            <option value="osteopathe">Ostéopathe</option>
-                            <option value="sage-femme">Sage-Femme</option>
-                            <option value="ibclc">Consultante IBCLC</option>
-                            <option value="consultante-lactation">Consultante Lactation</option>
-                            <option value="logopediste">Logopédiste</option>
-                            <option value="orl">ORL</option>
-                            <option value="dentiste">Dentiste</option>
-                            <option value="physiotherapeute">Physiothérapeute</option>
-                            <option value="nutritionniste">Nutritionniste</option>
-                        </select>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Cécile Techer</div>
+                        <span class="annuaire-specialty">Ostéopathe</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 764 90 83</div>
+                            <div>Chemin de Chanrion 68<br>1893 Muraz</div>
+                            <div><a href="https://www.osteobebe.ch" target="_blank">www.osteobebe.ch</a></div>
+                        </div>
                     </div>
-                    
-                    <div class="filter-group">
-                        <label for="ville">Ville ou NPA</label>
-                        <input type="text" id="ville" name="ville" placeholder="Ex: Lausanne ou 1000">
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Céline Rossier</div>
+                        <span class="annuaire-specialty">Ostéopathe</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">077 440 56 80</div>
+                            <div>Route de Corberaye 6C (Centre AST)<br>1934 Le Châble</div>
+                            <div>Rue du Pont 5 / 1870 Monthey</div>
+                            <div><a href="mailto:rossier.celine@protonmail.com">rossier.celine@protonmail.com</a></div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Charline Sanchez</div>
+                        <span class="annuaire-specialty">Ostéopathe</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 451 37 38</div>
+                            <div>Espace de santé intégrative<br>Route du stand 11<br>1880 Bex</div>
+                            <div><a href="mailto:charline@sante-bex.ch">charline@sante-bex.ch</a></div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Adeline Emery</div>
+                        <span class="annuaire-specialty">Ostéopathe</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">077 457 88 18</div>
+                            <div>Espace de santé intégrative<br>Route du stand 11<br>1880 Bex</div>
+                            <div><a href="mailto:adelineemerypro@gmail.com">adelineemerypro@gmail.com</a></div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Mylène Vogel-Gillioz</div>
+                        <span class="annuaire-specialty">Ostéopathe</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 381 71 96</div>
+                            <div>Centre de Prévention et Santé de Grône<br>Rue Centrale 123<br>3979 Grône</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Lauriane Gay</div>
+                        <span class="annuaire-specialty">Ostéopathe</span>
+                        <div class="annuaire-info">
+                            <div>Ancienne route cantonale 40<br>1902 Evionnaz</div>
+                            <div><a href="mailto:lauriane@osteau.ch">lauriane@osteau.ch</a></div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Stéphanie Borboën-Besse</div>
+                        <span class="annuaire-specialty">Ostéopathe</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 191 99 26</div>
+                            <div>Chemin des Truits 31<br>1867 Ollon</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Mahaux Véronique</div>
+                        <span class="annuaire-specialty">Ostéopathe</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">076 586 50 54</div>
+                            <div>Place de l'Hôtel de Ville 2<br>1867 Ollon</div>
+                        </div>
                     </div>
                 </div>
-                
-                <button class="search-btn" onclick="searchProfessionals()">Rechercher</button>
             </div>
 
-            <!-- Résultats -->
-            <div id="results-container">
-                <div class="loading">Chargement des professionnels...</div>
+            <!-- Sages-Femmes -->
+            <div class="annuaire-section" id="section-sages-femmes">
+                <h2 class="annuaire-section-title">🤱 Sages-Femmes</h2>
+                <div class="annuaire-grid">
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Esther Lüdemann</div>
+                        <span class="annuaire-specialty">Sage-Femme</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 458 39 54</div>
+                            <div>Maison de naissance de Lucines<br>Collombey-Muraz</div>
+                            <div><a href="mailto:esther.ludemann@gmail.com">esther.ludemann@gmail.com</a></div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Claire Pasquereau</div>
+                        <span class="annuaire-specialty">Sage-Femme</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 243 28 48</div>
+                            <div>Esplanade de l'Église 2<br>1913 Saillon</div>
+                            <div><a href="mailto:pasquereauclaire@hotmail.com">pasquereauclaire@hotmail.com</a></div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Fabienne Clerc</div>
+                        <span class="annuaire-specialty">Sage-Femme</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">076 541 42 23</div>
+                            <div>Maison de Naissance des Lucines<br>Chemin du Verger 3b<br>1868 Collombey</div>
+                            <div><a href="mailto:fabienneclerc.sagefemme@gmail.com">fabienneclerc.sagefemme@gmail.com</a></div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Carolyn Giroud Dorsaz</div>
+                        <span class="annuaire-specialty">Sage-Femme</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">078 607 54 59</div>
+                            <div>Cabinet Graine2vie<br>Route de Champagneule 29<br>1926 Fully</div>
+                            <div><a href="mailto:carolyngiroud@mycable.ch">carolyngiroud@mycable.ch</a></div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Stéphanie Anderegg</div>
+                        <span class="annuaire-specialty">Sage-Femme</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 740 70 10</div>
+                            <div><a href="mailto:stephanieanderegg.sfi@gmail.com">stephanieanderegg.sfi@gmail.com</a></div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Juliette Cloche</div>
+                        <span class="annuaire-specialty">Sage-Femme</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">076 489 35 68</div>
+                            <div>Cabinet des Sages-Femmes du Chablais<br>Chemin du Verger 3<br>1868 Collombey</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Delphine Blot-Hanssens</div>
+                        <span class="annuaire-specialty">Sage-Femme</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">076 326 39 88</div>
+                            <div>Route de la Rasse 7<br>1902 Evionnaz</div>
+                            <div><a href="mailto:delphinblot-sagefemme@protonmail.com">delphinblot-sagefemme@protonmail.com</a></div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Martine Erard</div>
+                        <span class="annuaire-specialty">Sage-Femme</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 701 17 64</div>
+                            <div>Maison de Naissance des Lucines<br>Chemin du Verger 3b<br>1868 Collombey</div>
+                            <div><a href="mailto:martine.sagefemme@gmail.com">martine.sagefemme@gmail.com</a></div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Christine Joost</div>
+                        <span class="annuaire-specialty">Sage-Femme</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 623 05 62</div>
+                            <div><a href="mailto:info@christine-sage-femme.ch">info@christine-sage-femme.ch</a></div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Laure Lodovici</div>
+                        <span class="annuaire-specialty">Sage-Femme</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">078 303 14 16</div>
+                            <div><a href="mailto:lodovici.laure@protonmail.com">lodovici.laure@protonmail.com</a></div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Noémie Perrion</div>
+                        <span class="annuaire-specialty">Sage-Femme</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">077 509 36 09</div>
+                            <div>Région Martigny</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Alexandra Veuthey</div>
+                        <span class="annuaire-specialty">Sage-Femme</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">078 603 97 52</div>
+                            <div>Route du Village 73<br>1907 Saxon</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Barbara Peretten</div>
+                        <span class="annuaire-specialty">Sage-Femme</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 739 88 08</div>
+                            <div>Chablais VS-VD</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Clémentine Fasel</div>
+                        <span class="annuaire-specialty">Sage-Femme</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">076 418 38 75</div>
+                            <div>Sion et environs</div>
+                            <div><a href="mailto:c.elsig@hotmail.com">c.elsig@hotmail.com</a></div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- IBCLC -->
+            <div class="annuaire-section" id="section-ibclc">
+                <h2 class="annuaire-section-title">🍼 Consultantes lactation IBCLC</h2>
+                <div class="annuaire-grid">
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Carole Genoud</div>
+                        <span class="annuaire-specialty">IBCLC</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 249 23 81</div>
+                            <div>Infirmière consultante en lactation IBCLC<br>Consultante en sommeil</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Véronique Taton</div>
+                        <span class="annuaire-specialty">IBCLC</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">078 260 07 79</div>
+                            <div>Consultante en lactation IBCLC<br>Consultante en sommeil</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consultantes en lactation -->
+            <div class="annuaire-section" id="section-lactation">
+                <h2 class="annuaire-section-title">🤱 Consultantes en lactation</h2>
+                <div class="annuaire-grid">
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Clémentine Fasel</div>
+                        <span class="annuaire-specialty">Consultante lactation</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">076 418 38 75</div>
+                            <div>Sion et environs</div>
+                            <div><a href="mailto:c.elsig@hotmail.com">c.elsig@hotmail.com</a></div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Claire Pasquereau</div>
+                        <span class="annuaire-specialty">Consultante lactation</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 243 28 48</div>
+                            <div>Esplanade de l'Église 2<br>1913 Saillon</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Delphine Blot-Hanssens</div>
+                        <span class="annuaire-specialty">Consultante lactation</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">076 326 39 88</div>
+                            <div>Route de la Rasse 7<br>1902 Evionnaz</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Noémie Perrion</div>
+                        <span class="annuaire-specialty">Consultante lactation</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">077 509 36 09</div>
+                            <div>Région Martigny</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Stéphanie Anderegg</div>
+                        <span class="annuaire-specialty">Consultante lactation</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 740 70 10</div>
+                            <div><a href="mailto:stephanieanderegg.sfi@gmail.com">stephanieanderegg.sfi@gmail.com</a></div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Esther Lüdemann</div>
+                        <span class="annuaire-specialty">Consultante lactation</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 458 39 54</div>
+                            <div>Maison de naissance de Lucines<br>Collombey-Muraz</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Barbara Peretten</div>
+                        <span class="annuaire-specialty">Consultante lactation</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 739 88 08</div>
+                            <div>Chablais VS-VD</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Alexandra Veuthey</div>
+                        <span class="annuaire-specialty">Consultante lactation</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">078 603 97 52</div>
+                            <div>Route du Village 73<br>1907 Saxon</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Martine Erard</div>
+                        <span class="annuaire-specialty">Consultante lactation</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 701 17 64</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logopédistes -->
+            <div class="annuaire-section" id="section-logopedistes">
+                <h2 class="annuaire-section-title">🗣️ Logopédistes</h2>
+                <div class="annuaire-grid">
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Smaranda Veuillet</div>
+                        <span class="annuaire-specialty">Logopédiste</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 524 10 76</div>
+                            <div>Route du Stand 11<br>1880 Bex</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ORL-Dentistes -->
+            <div class="annuaire-section" id="section-orl">
+                <h2 class="annuaire-section-title">🦷 ORL & Dentistes</h2>
+                <div class="annuaire-grid">
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Mirko Bozin</div>
+                        <span class="annuaire-specialty">Chirurgien-Dentiste</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">032 731 65 30</div>
+                            <div>Chirurgien-dentiste — Chirurgie au laser</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Cécile De Sandre</div>
+                        <span class="annuaire-specialty">Médecin ORL</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">024 472 12 10</div>
+                            <div>Médecin ORL<br>Rue de la Verrerie 3</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Kodzo Konu</div>
+                        <span class="annuaire-specialty">Médecin ORL</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">026 306 36 10</div>
+                            <div>Médecin ORL — HFR Fribourg</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Victor Colin</div>
+                        <span class="annuaire-specialty">ORL</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">026 306 36 10</div>
+                            <div>ORL — HFR Fribourg</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Physiothérapeutes -->
+            <div class="annuaire-section" id="section-physio">
+                <h2 class="annuaire-section-title">💪 Physiothérapeutes</h2>
+                <div class="annuaire-grid">
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Célia Moret</div>
+                        <span class="annuaire-specialty">Physiothérapeute</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">077 523 39 41</div>
+                            <div>Centre Pédiatrique Pluridisciplinaire du Chablais<br>Rue du Pont 5</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Sabine Adami</div>
+                        <span class="annuaire-specialty">Physiothérapeute</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">077 415 00 64</div>
+                            <div>Spécialisée en physiothérapie de l'allaitement<br>Rue des Remparts 14</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nutrition -->
+            <div class="annuaire-section" id="section-nutrition">
+                <h2 class="annuaire-section-title">🥗 Nutrition</h2>
+                <div class="annuaire-grid">
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Cinzia Pommaz Cantu</div>
+                        <span class="annuaire-specialty">Nutritionniste</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 900 96 40</div>
+                            <div>Nutritionniste Fonctionnelle<br>Spécialisée en RGO et Freins Restrictifs</div>
+                        </div>
+                    </div>
+                    <div class="annuaire-card">
+                        <div class="annuaire-name">Céline Lovey</div>
+                        <span class="annuaire-specialty">Diéticienne</span>
+                        <div class="annuaire-info">
+                            <div class="annuaire-phone">079 108 66 06</div>
+                            <div>Diéticienne ASDD<br>Maître praticienne en PNL</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <section class="section section-turquoise">
-        <div class="container text-center">
-            <h2 style="margin-bottom: 1rem;">Vous êtes professionnel de santé ?</h2>
-            <p style="font-size: 1.1rem; margin-bottom: 2rem;">Rejoignez notre annuaire et gagnez en visibilité</p>
-            <a href="pro.html" class="btn" style="background: white; color: var(--turquoise-dark);">Inscription Pro - 30 CHF/an</a>
-        </div>
-    </section>
-
-        <footer class="footer">
+    <!-- Footer -->
+    <footer class="footer">
         <div class="footer-content">
             <p>Copyright ©2026 | Toute reproduction même partielle est interdite. | <a href="contact.html">Contact</a> | Site réalisé par @mndesign</p>
         </div>
@@ -340,6 +542,21 @@
             <a href="#">Conditions Générales</a>
         </div>
     </footer>
+
     <script src="js/script.js"></script>
+    <script>
+        function filterAll(btn) {
+            document.querySelectorAll('.annuaire-section').forEach(s => s.style.display = '');
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+        function filterSection(id, btn) {
+            document.querySelectorAll('.annuaire-section').forEach(s => {
+                s.style.display = s.id === 'section-' + id ? '' : 'none';
+            });
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+    </script>
 </body>
 </html>
