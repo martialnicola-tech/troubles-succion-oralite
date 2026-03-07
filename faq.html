@@ -608,5 +608,18 @@
         </div>
     </footer>
     <script src="js/script.js"></script>
+    <script>
+    document.querySelectorAll('.faq-question').forEach(function(question) {
+        question.addEventListener('click', function() {
+            var item = this.closest('.faq-item');
+            // Fermer les autres items ouverts
+            document.querySelectorAll('.faq-item.active').forEach(function(openItem) {
+                if (openItem !== item) openItem.classList.remove('active');
+            });
+            // Ouvrir / fermer celui cliqué
+            item.classList.toggle('active');
+        });
+    });
+    </script>
 </body>
 </html>
