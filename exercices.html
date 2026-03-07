@@ -11,13 +11,6 @@
             max-width: 160px;
             margin: 0.75rem auto 0;
         }
-        .video-short-wrapper iframe {
-            width: 100%;
-            aspect-ratio: 9 / 16;
-            border-radius: 12px;
-            border: none;
-            display: block;
-        }
         .video-label {
             font-size: 0.82rem;
             color: #666;
@@ -64,6 +57,87 @@
             .exercise-block {
                 grid-template-columns: 1fr;
             }
+        }
+
+        /* ── Vignette vidéo cliquable ── */
+        .video-thumb-wrapper {
+            position: relative;
+            cursor: pointer;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 9 / 16;
+            background: #111;
+        }
+        .video-thumb-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.2s;
+        }
+        .video-thumb-wrapper:hover img {
+            opacity: 0.8;
+        }
+        .video-thumb-wrapper .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.65);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            pointer-events: none;
+            transition: background 0.2s;
+        }
+        .video-thumb-wrapper:hover .play-btn {
+            background: rgba(200, 0, 0, 0.88);
+        }
+
+        /* ── Modal lightbox ── */
+        #video-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        #video-modal.open {
+            display: flex;
+        }
+        #video-modal-inner {
+            position: relative;
+            width: min(360px, 88vw);
+            aspect-ratio: 9 / 16;
+            max-height: 86vh;
+        }
+        #video-modal-inner iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 14px;
+        }
+        #video-modal-close {
+            position: absolute;
+            top: -44px;
+            right: 0;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2.2rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0 4px;
+        }
+        #video-modal-close:hover {
+            color: #ccc;
         }
     </style>
 </head>
@@ -165,7 +239,10 @@
                 </div>
                 <div>
                     <div class="video-short-wrapper">
-                        <iframe src="https://www.youtube.com/embed/UVMIHQyh8p8?rel=0" title="Comptine visage pour diminuer le réflexe nauséeux" allowfullscreen></iframe>
+                        <div class="video-thumb-wrapper" data-videoid="UVMIHQyh8p8" data-title="Comptine visage pour diminuer le réflexe nauséeux">
+                            <img src="https://img.youtube.com/vi/UVMIHQyh8p8/hqdefault.jpg" alt="Comptine visage pour diminuer le réflexe nauséeux">
+                            <span class="play-btn">▶</span>
+                        </div>
                     </div>
                     <p class="video-label">Comptine sur le visage</p>
                 </div>
@@ -185,7 +262,10 @@
                 </div>
                 <div>
                     <div class="video-short-wrapper">
-                        <iframe src="https://www.youtube.com/embed/TvybN8GchjU?rel=0" title="Masser sous le menton" allowfullscreen></iframe>
+                        <div class="video-thumb-wrapper" data-videoid="TvybN8GchjU" data-title="Masser sous le menton">
+                            <img src="https://img.youtube.com/vi/TvybN8GchjU/hqdefault.jpg" alt="Masser sous le menton">
+                            <span class="play-btn">▶</span>
+                        </div>
                     </div>
                     <p class="video-label">Masser sous le menton</p>
                 </div>
@@ -200,7 +280,10 @@
                 </div>
                 <div>
                     <div class="video-short-wrapper">
-                        <iframe src="https://www.youtube.com/embed/JNx9OfHlSoU?rel=0" title="Tummy Time" allowfullscreen></iframe>
+                        <div class="video-thumb-wrapper" data-videoid="JNx9OfHlSoU" data-title="Tummy Time">
+                            <img src="https://img.youtube.com/vi/JNx9OfHlSoU/hqdefault.jpg" alt="Tummy Time">
+                            <span class="play-btn">▶</span>
+                        </div>
                     </div>
                     <p class="video-label">Tummy Time</p>
                 </div>
@@ -218,13 +301,19 @@
                     <div class="two-videos">
                         <div>
                             <div class="video-short-wrapper">
-                                <iframe src="https://www.youtube.com/embed/XAAzBa3vCGk?rel=0" title="Le Guppy" allowfullscreen></iframe>
+                                <div class="video-thumb-wrapper" data-videoid="XAAzBa3vCGk" data-title="Le Guppy">
+                                    <img src="https://img.youtube.com/vi/XAAzBa3vCGk/hqdefault.jpg" alt="Le Guppy">
+                                    <span class="play-btn">▶</span>
+                                </div>
                             </div>
                             <p class="video-label">Guppy</p>
                         </div>
                         <div>
                             <div class="video-short-wrapper">
-                                <iframe src="https://www.youtube.com/embed/jZXC1g6Sz10?rel=0" title="Le Guppy variante" allowfullscreen></iframe>
+                                <div class="video-thumb-wrapper" data-videoid="jZXC1g6Sz10" data-title="Le Guppy variante">
+                                    <img src="https://img.youtube.com/vi/jZXC1g6Sz10/hqdefault.jpg" alt="Le Guppy variante">
+                                    <span class="play-btn">▶</span>
+                                </div>
                             </div>
                             <p class="video-label">Guppy 2</p>
                         </div>
@@ -271,7 +360,10 @@
                 </div>
                 <div>
                     <div class="video-short-wrapper">
-                        <iframe src="https://www.youtube.com/embed/QBAxU8PPmLg?rel=0" title="Masser sous le frein" allowfullscreen></iframe>
+                        <div class="video-thumb-wrapper" data-videoid="QBAxU8PPmLg" data-title="Masser sous le frein">
+                            <img src="https://img.youtube.com/vi/QBAxU8PPmLg/hqdefault.jpg" alt="Masser sous le frein">
+                            <span class="play-btn">▶</span>
+                        </div>
                     </div>
                     <p class="video-label">Masser sous le frein</p>
                 </div>
@@ -288,7 +380,10 @@
                 </div>
                 <div>
                     <div class="video-short-wrapper">
-                        <iframe src="https://www.youtube.com/embed/TvybN8GchjU?rel=0" title="Masser sous le menton" allowfullscreen></iframe>
+                        <div class="video-thumb-wrapper" data-videoid="TvybN8GchjU" data-title="Masser sous le menton">
+                            <img src="https://img.youtube.com/vi/TvybN8GchjU/hqdefault.jpg" alt="Masser sous le menton">
+                            <span class="play-btn">▶</span>
+                        </div>
                     </div>
                     <p class="video-label">Masser sous le menton</p>
                 </div>
@@ -312,7 +407,10 @@
                 </div>
                 <div>
                     <div class="video-short-wrapper">
-                        <iframe src="https://www.youtube.com/embed/TvybN8GchjU?rel=0" title="Masser sous le menton" allowfullscreen></iframe>
+                        <div class="video-thumb-wrapper" data-videoid="TvybN8GchjU" data-title="Masser sous le menton">
+                            <img src="https://img.youtube.com/vi/TvybN8GchjU/hqdefault.jpg" alt="Masser sous le menton">
+                            <span class="play-btn">▶</span>
+                        </div>
                     </div>
                     <p class="video-label">Masser sous le menton</p>
                 </div>
@@ -335,7 +433,10 @@
                 </div>
                 <div>
                     <div class="video-short-wrapper">
-                        <iframe src="https://www.youtube.com/embed/QBAxU8PPmLg?rel=0" title="Masser sous le frein" allowfullscreen></iframe>
+                        <div class="video-thumb-wrapper" data-videoid="QBAxU8PPmLg" data-title="Masser sous le frein">
+                            <img src="https://img.youtube.com/vi/QBAxU8PPmLg/hqdefault.jpg" alt="Masser sous le frein">
+                            <span class="play-btn">▶</span>
+                        </div>
                     </div>
                     <p class="video-label">Masser sous le frein</p>
                 </div>
@@ -365,6 +466,14 @@
         </div>
     </section>
 
+    <!-- Modal vidéo lightbox -->
+    <div id="video-modal" role="dialog" aria-modal="true" aria-label="Lecteur vidéo">
+        <div id="video-modal-inner">
+            <button id="video-modal-close" aria-label="Fermer la vidéo">✕</button>
+            <iframe id="video-modal-iframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
@@ -376,6 +485,43 @@
             <a href="conditions-generales.html">Conditions Générales</a>
         </div>
     </footer>
+
     <script src="js/script.js"></script>
+    <script>
+    (function () {
+        var modal  = document.getElementById('video-modal');
+        var iframe = document.getElementById('video-modal-iframe');
+        var closeBtn = document.getElementById('video-modal-close');
+
+        function openModal(videoId, title) {
+            iframe.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0';
+            iframe.title = title || '';
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('open');
+            iframe.src = '';
+            document.body.style.overflow = '';
+        }
+
+        document.querySelectorAll('.video-thumb-wrapper').forEach(function (wrapper) {
+            wrapper.addEventListener('click', function () {
+                openModal(this.dataset.videoid, this.dataset.title);
+            });
+        });
+
+        if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', function (e) {
+            if (e.target === this) closeModal();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+        });
+    })();
+    </script>
 </body>
 </html>
