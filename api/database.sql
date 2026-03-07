@@ -107,6 +107,12 @@ ON DUPLICATE KEY UPDATE username = username;
 ALTER TABLE professionnels ADD COLUMN IF NOT EXISTS abonnement_actif TINYINT(1) DEFAULT 1;
 ALTER TABLE professionnels ADD COLUMN IF NOT EXISTS date_fin_abonnement DATE DEFAULT NULL;
 
+-- Colonnes pour la recherche géographique
+ALTER TABLE professionnels ADD COLUMN IF NOT EXISTS canton VARCHAR(50) DEFAULT NULL;
+ALTER TABLE professionnels ADD COLUMN IF NOT EXISTS ville VARCHAR(100) DEFAULT NULL;
+ALTER TABLE professionnels ADD COLUMN IF NOT EXISTS npa VARCHAR(10) DEFAULT NULL;
+ALTER TABLE professionnels ADD COLUMN IF NOT EXISTS statut ENUM('actif', 'inactif', 'suspendu') DEFAULT 'actif';
+
 -- Index pour améliorer les performances de recherche
 CREATE INDEX IF NOT EXISTS idx_canton ON professionnels(canton);
 CREATE INDEX IF NOT EXISTS idx_specialite ON professionnels(specialite);
