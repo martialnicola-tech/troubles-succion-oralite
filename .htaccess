@@ -79,6 +79,7 @@ RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 RewriteEngine on
 RewriteCond %{HTTP_REFERER} !^$
 RewriteCond %{HTTP_REFERER} !^https://(www\.)?troubles-succion-oralite\.ch [NC]
+RewriteCond %{HTTP_REFERER} !^https://[^/]*\.hostingersite\.com [NC]
 RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F,L]
 
 # Désactiver l'affichage des répertoires
