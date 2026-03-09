@@ -1,0 +1,10 @@
+{
+  "liveServer.settings.port": 5500,
+  "liveServer.settings.root": "/",
+  "liveServer.settings.CustomBrowser": "chrome",
+  "editor.wordWrap": "on",
+  "editor.formatOnSave": true,
+  "files.associations": {
+    "*.html": "html"
+  }
+}
