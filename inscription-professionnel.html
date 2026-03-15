@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr-CH">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription Professionnels - Troubles de la Succion</title>
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
     <meta name="description" content="Rejoignez notre annuaire de professionnels spécialisés dans les troubles de la succion et l'oralité.">
+            <meta property="og:type" content="website">
+    <meta property="og:url" content="https://troubles-succion-oralite.ch/inscription-professionnel.html">
+    <meta property="og:title" content="Inscription Professionnel — Annuaire Troubles de la Succion">
+    <meta property="og:description" content="Inscrivez-vous à l'annuaire des professionnels spécialisés en troubles de la succion et de l'oralité en Suisse romande.">
+    <meta property="og:image" content="https://troubles-succion-oralite.ch/images/hero/troubles-succion-oralite-bebe-suisse-romande.jpg">
+    <meta property="og:locale" content="fr_CH">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Inscription Professionnel — Annuaire Troubles de la Succion">
+    <meta name="twitter:description" content="Inscrivez-vous à l'annuaire des professionnels spécialisés en troubles de la succion et de l'oralité en Suisse romande.">
+        <link rel="preload" as="image" href="images/hero/inscription-professionnel-sante-suisse-romande.jpg" fetchpriority="high">
+    <link rel="canonical" href="https://troubles-succion-oralite.ch/inscription-professionnel.html">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="chatbot.css">
     <style>
         /* Variables manquantes dans style.css */
         :root {
@@ -263,11 +277,11 @@
         <div class="header-content">
             <div class="logo">
                 <a href="index.html">
-                    <img src="images/logo.png" alt="Troubles de la Succion" class="logo-img">
+                    <img src="/images/logo.svg" alt="Troubles de la Succion" class="logo-img">
                 </a>
             </div>
             <nav class="nav">
-                <button class="nav-toggle">☰</button>
+                <button class="nav-toggle" aria-label="Menu">☰</button>
                                 <ul class="nav-menu">
                     <li><a href="pour-qui.html">Pour qui ?</a></li>
                     <li><a href="troubles.html">Troubles</a></li>
@@ -325,7 +339,9 @@
     </header>
 
     <!-- Hero Section -->
-        <section class="hero" style="background-image: url('images/hero/inscription-professionnel-sante-suisse-romande.jpg'); background-color: var(--turquoise);">
+        <section class="hero" style="background-color: var(--turquoise);">
+    <img class="hero-img" src="images/hero/inscription-professionnel-sante-suisse-romande.jpg" alt="Inscription professionnel — annuaire troubles de la succion" fetchpriority="high" width="1400" height="400" loading="eager">
+>
         <div class="hero-content">
                 <h1 class="hero-title">Inscription Professionnels</h1>
                 <p class="hero-subtitle">Rejoignez notre annuaire spécialisé</p>
@@ -415,6 +431,13 @@
                             <span class="form-error" id="error-nom">Veuillez entrer votre nom</span>
                         </div>
 
+                        <!-- Nom du cabinet -->
+                        <div class="form-group">
+                            <label for="cabinet" class="form-label">Nom du cabinet / structure</label>
+                            <input type="text" id="cabinet" name="cabinet" class="form-input" placeholder="Ex : Cabinet Graine2vie, Centre AST…">
+                            <small style="color: var(--color-text-light); font-size: 0.875rem;">Optionnel — s'affichera au-dessus de l'adresse</small>
+                        </div>
+
                         <!-- Adresse du cabinet -->
                         <div class="form-group">
                             <label for="adresse" class="form-label required">Adresse du cabinet</label>
@@ -436,6 +459,19 @@
                             <span class="form-error" id="error-lieu">Veuillez entrer la ville</span>
                         </div>
 
+                        <!-- 2ème lieu d'exercice -->
+                        <div class="form-group">
+                            <label class="form-label" style="color: var(--color-teal); font-weight: 600;">
+                                + 2ème lieu d'exercice <small style="font-weight:400; color: var(--color-text-light);">(optionnel)</small>
+                            </label>
+                            <input type="text" id="cabinet2" name="cabinet2" class="form-input" placeholder="Nom du 2ème cabinet (optionnel)" style="margin-bottom:0.5rem;">
+                            <input type="text" id="adresse2" name="adresse2" class="form-input" placeholder="Rue et numéro" style="margin-bottom:0.5rem;">
+                            <div style="display:flex; gap:0.5rem;">
+                                <input type="text" id="cp2" name="cp2" class="form-input" pattern="[0-9]{4}" placeholder="NPA" style="width:100px; flex-shrink:0;">
+                                <input type="text" id="lieu2" name="lieu2" class="form-input" placeholder="Ville">
+                            </div>
+                        </div>
+
                         <!-- Email -->
                         <div class="form-group">
                             <label for="email" class="form-label required">Email professionnel</label>
@@ -445,8 +481,14 @@
 
                         <!-- Téléphone -->
                         <div class="form-group">
-                            <label for="telephone" class="form-label">Téléphone</label>
-                            <input type="tel" id="telephone" name="telephone" class="form-input" placeholder="+41 XX XXX XX XX">
+                            <label for="telephone" class="form-label">Téléphone mobile</label>
+                            <input type="tel" id="telephone" name="telephone" class="form-input" placeholder="079 XXX XX XX">
+                        </div>
+
+                        <!-- Téléphone fixe -->
+                        <div class="form-group">
+                            <label for="telephone2" class="form-label">Téléphone fixe <small style="font-weight:400; color: var(--color-text-light);">(optionnel)</small></label>
+                            <input type="tel" id="telephone2" name="telephone2" class="form-input" placeholder="024 XXX XX XX">
                         </div>
 
                         <!-- Site internet -->
@@ -489,7 +531,7 @@
                         <div class="stripe-info">
                             <span>Paiement sécurisé par</span>
                             <svg height="24" viewBox="0 0 60 25" width="60" xmlns="http://www.w3.org/2000/svg"><title>Stripe logo</title><path d="m59.64 14.28h-8.06c.19 1.93 1.6 2.55 3.2 2.55 1.64 0 2.96-.37 4.05-.95v3.32a8.33 8.33 0 0 1 -4.56 1.1c-4.01 0-6.83-2.5-6.83-7.48 0-4.19 2.39-7.52 6.3-7.52 3.92 0 5.96 3.28 5.96 7.5 0 .4-.04 1.26-.06 1.48zm-5.92-5.62c-1.03 0-2.17.73-2.17 2.58h4.25c0-1.85-1.07-2.58-2.08-2.58zm-40.95-2.03c-1.03 0-1.63.42-1.63 1.24 0 .82.6 1.24 1.63 1.24h3.12c2.58 0 4.05 1.82 4.05 4.3 0 3.01-1.89 5.25-5.42 5.25-1.55 0-3.36-.46-4.67-1.03v-3.52c1.38.68 3.22 1.13 4.67 1.13 1.23 0 1.75-.53 1.75-1.33 0-.8-.52-1.33-1.75-1.33h-3.12c-2.63 0-4.3-1.82-4.3-4.25 0-3.01 1.89-5.25 5.26-5.25 1.61 0 3.4.46 4.64 1.03v3.44c-1.28-.68-3.14-1.06-4.23-1.06zm29.9 2.08c-1.03 0-1.91.84-1.91 2.55v3.52c0 1.7.88 2.54 1.91 2.54 1.03 0 1.9-.84 1.9-2.54v-3.52c0-1.7-.87-2.55-1.9-2.55zm-9.06-2.08c-1.03 0-1.63.42-1.63 1.24 0 .82.6 1.24 1.63 1.24h3.12c2.58 0 4.05 1.82 4.05 4.3 0 3.01-1.89 5.25-5.42 5.25-1.55 0-3.36-.46-4.67-1.03v-3.52c1.38.68 3.22 1.13 4.67 1.13 1.23 0 1.75-.53 1.75-1.33 0-.8-.52-1.33-1.75-1.33h-3.12c-2.63 0-4.3-1.82-4.3-4.25 0-3.01 1.89-5.25 5.26-5.25 1.61 0 3.4.46 4.64 1.03v3.44c-1.28-.68-3.14-1.06-4.23-1.06zm24.49-2.04h4.68v13.88h-4.68zm-39.93 0h5.21l2.88 5.62 2.91-5.62h5.06l-5.67 10.82-5.69 11.06h-5.21l2.69-5.22zm-6.28 0h4.68v13.88h-4.68z" fill="#6772e5"/></svg>
-                            <span style="color: var(--color-text-light);">• TWINT accepté</span>
+                            <span style="color: var(--color-text-light);">• Visa / Mastercard / AMEX</span>
                         </div>
                     </form>
                 </div>
@@ -507,8 +549,8 @@
             <a href="conditions-generales.html">Conditions Générales</a>
         </div>
     </footer>
-    <script src="js/script.js"></script>
-<script src="chatbot.js"></script>
+    <script src="js/script.js" defer></script>
+<script src="chatbot.js" defer></script>
 <script>
 document.getElementById('registrationForm').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -567,11 +609,17 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
                 specialite:  document.getElementById('specialite').value.trim(),
                 prenom:      document.getElementById('prenom').value.trim(),
                 nom:         document.getElementById('nom').value.trim(),
+                cabinet:     document.getElementById('cabinet').value.trim(),
                 adresse:     document.getElementById('adresse').value.trim(),
                 cp:          cp,
                 lieu:        document.getElementById('lieu').value.trim(),
+                cabinet2:    document.getElementById('cabinet2').value.trim(),
+                adresse2:    document.getElementById('adresse2').value.trim(),
+                cp2:         document.getElementById('cp2').value.trim(),
+                lieu2:       document.getElementById('lieu2').value.trim(),
                 email:       email,
                 telephone:   document.getElementById('telephone').value.trim(),
+                telephone2:  document.getElementById('telephone2').value.trim(),
                 siteWeb:     siteWeb,
             })
         });
@@ -580,6 +628,26 @@ document.getElementById('registrationForm').addEventListener('submit', async fun
 
         if (data.success && data.checkoutUrl) {
             window.location.href = data.checkoutUrl;
+        } else if (data.renewal) {
+            // Professionnel existant → proposer le renouvellement
+            const confirm = window.confirm(
+                `Bonjour ${data.prenom} ${data.nom} 👋\n\nUn profil existe déjà pour cet email.\n\nSouhaitez-vous renouveler votre abonnement (30 CHF/an) ?`
+            );
+            if (confirm) {
+                const renewResp = await fetch('api/renew-subscription.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ professionnel_id: data.professionnelId })
+                });
+                const renewData = await renewResp.json();
+                if (renewData.success && renewData.checkoutUrl) {
+                    window.location.href = renewData.checkoutUrl;
+                } else {
+                    alert(renewData.message || 'Une erreur est survenue.');
+                }
+            }
+            btn.disabled = false;
+            btn.textContent = 'Continuer vers le paiement';
         } else {
             alert(data.message || 'Une erreur est survenue. Veuillez réessayer.');
             btn.disabled = false;

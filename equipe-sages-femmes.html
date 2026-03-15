@@ -5,14 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sages-Femmes - Troubles de la Succion</title>
     <meta name="description" content="Sages-femmes formées à la détection et l'accompagnement des freins restrictifs">
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="chatbot.css">
+<style>
+  .annuaire-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .annuaire-card { background: white; border-radius: 10px; padding: 1.25rem 1.5rem; border: 1px solid #e8e8e8; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: box-shadow 0.2s; }
+  .annuaire-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+  .annuaire-name { font-weight: 700; font-size: 1rem; color: #222; margin-bottom: 0.35rem; }
+  .annuaire-specialty { font-size: 0.8rem; font-weight: 600; color: white; background: var(--turquoise, #4ECDC4); display: inline-block; padding: 0.15rem 0.6rem; border-radius: 1rem; margin-bottom: 0.6rem; }
+  .annuaire-info { font-size: 0.88rem; color: #555; line-height: 1.7; }
+  .annuaire-info a { color: var(--turquoise, #4ECDC4); text-decoration: underline; }
+  .annuaire-phone { font-weight: 600; color: #333; }
+  @media (max-width: 900px) { .annuaire-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .annuaire-grid { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
         <header class="header">
         <div class="header-content">
             <div class="logo">
                 <a href="index.html">
-                    <img src="images/logo.png" alt="Troubles de la Succion" class="logo-img">
+                    <img src="/images/logo.svg" alt="Troubles de la Succion" class="logo-img">
                 </a>
             </div>
             <nav class="nav">
@@ -72,128 +87,24 @@
                 </nav>
         </div>
     </header>
-            <section class="hero" style="background-image: url('images/hero/sage-femme-allaitement-frein-lingual-suisse.jpg'); background-color: var(--turquoise);">
+            <section class="hero" style="background-image: url('/images/hero/sage-femme-specialisee-allaitement-et-frein-lingual-suisse-romande.jpg'); background-color: var(--turquoise);">
         <div class="hero-content">
             <h1 class="hero-title">Liste<br>des<br>Sages-femmes</h1>
         </div>
     </section>
     <section class="section">
         <div class="container">
-            <div class="team-grid">
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Esther Lüdemann</p>
-                    <p class="team-info">079 458 39 54</p>
-                    <p class="team-info">Maison de naissance de Lucines</p>
-                    <p class="team-info">Collombey-Muraz</p>
-                    <p class="team-info"><a href="mailto:esther.ludemann@gmail.com">esther.ludemann@gmail.com</a></p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Claire Pasquereau</p>
-                    <p class="team-info">079 243 28 48</p>
-                    <p class="team-info">Esplanande de l'Eglise 2</p>
-                    <p class="team-info">1913 Saillon</p>
-                    <p class="team-info"><a href="mailto:pasquereauclaire@hotmail.com">pasquereauclaire@hotmail.com</a></p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Fabienne Clerc</p>
-                    <p class="team-info">076 541 42 23</p>
-                    <p class="team-info">Maison de Naissance des Lucines</p>
-                    <p class="team-info">Chemin du Verger 3b</p>
-                    <p class="team-info">1868 Collombey</p>
-                    <p class="team-info"><a href="mailto:fabienneclerc.sagefemme@gmail.com">fabienneclerc.sagefemme@gmail.com</a></p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Carolyn Giroud Dorsaz</p>
-                    <p class="team-info">078 607 54 59</p>
-                    <p class="team-info">Cabinet Graine2vie</p>
-                    <p class="team-info">Route de Champagneule 29</p>
-                    <p class="team-info">1926 Fully</p>
-                    <p class="team-info"><a href="mailto:carolyngiroud@mycable.ch">carolyngiroud@mycable.ch</a></p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Stéphanie Anderegg</p>
-                    <p class="team-info">079 740 70 10</p>
-                    <p class="team-info"><a href="mailto:stephanieanderegg.sfi@gmail.com">stephanieanderegg.sfi@gmail.com</a></p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Juliette Cloche</p>
-                    <p class="team-info">076 489 35 68</p>
-                    <p class="team-info">Cabinet des Sages Femes du Chablais</p>
-                    <p class="team-info">Chemin du Verger 3</p>
-                    <p class="team-info">1868 Collombey</p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Delphine Blot-Hanssens</p>
-                    <p class="team-info">076 326 39 88</p>
-                    <p class="team-info">Route de la Rasse 7</p>
-                    <p class="team-info">1902 Evionnaz</p>
-                    <p class="team-info"><a href="mailto:delphinblot-sagefemme@protonmail.com">delphinblot-sagefemme@protonmail.com</a></p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Martine Erard</p>
-                    <p class="team-info">079 701 17 64</p>
-                    <p class="team-info">Maison de Naissance des Lucines</p>
-                    <p class="team-info">Chemin du Verger 3b</p>
-                    <p class="team-info">1868 Collombey</p>
-                    <p class="team-info"><a href="mailto:martine.sagefemme@gmail.com">martine.sagefemme@gmail.com</a></p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Christine Joost</p>
-                    <p class="team-info">079 623 05 62</p>
-                    <p class="team-info"><a href="mailto:info@christine-sage-femme.ch">info@christine-sage-femme.ch</a></p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Laure Lodovici</p>
-                    <p class="team-info">078 303 14 16</p>
-                    <p class="team-info"><a href="mailto:lodovici.laure@protonmail.com">lodovici.laure@protonmail.com</a></p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Noémie Perrion</p>
-                    <p class="team-info">077 509 36 09</p>
-                    <p class="team-info">Région Martigny</p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Alexandra Veuthey</p>
-                    <p class="team-info">078 603 97 52</p>
-                    <p class="team-info">Route du Village 73</p>
-                    <p class="team-info">1907 Saxon</p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Barbara Peretten</p>
-                    <p class="team-info">079 739 88 08</p>
-                    <p class="team-info">Chablais VS-VD</p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Clémentine Fasel</p>
-                    <p class="team-info">076 418 38 75</p>
-                    <p class="team-info">Sion et environ</p>
-                    <p class="team-info"><a href="mailto:c.elsig@hotmail.com">c.elsig@hotmail.com</a></p>
-                </div>
-                <div class="team-card"></div>
-                <div class="team-card"></div>
-            </div>
+            <div id="equipe-pros-grid" class="annuaire-grid" data-specialite="sage-femme"></div>
         </div>
     </section>
 
     <section class="section" style="padding-top:0;">
         <div class="container">
             <hr style="margin-bottom:2rem;">
-            <p>•</p>
-            <p>•</p>
+            <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-top:1.5rem;">
+                <a href="equipe-osteopathes.html" class="btn btn-outline">← Ostéopathes</a>
+                <a href="equipe-ibclc.html" class="btn btn-primary">IBCLC →</a>
+            </div>
         </div>
     </section>
     <footer class="footer">
@@ -207,6 +118,7 @@
         </div>
     </footer>
     <script src="js/script.js"></script>
-<script src="chatbot.js"></script>
+<script src="chatbot.js" defer></script>
+<script src="/js/equipe-dynamique.js"></script>
 </body>
 </html>

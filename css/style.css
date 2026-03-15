@@ -77,9 +77,21 @@ a { text-decoration: none; color: inherit; }
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     background-size: cover;
     background-position: center;
-    overflow: hidden;
+    background-repeat: no-repeat;
+}
+
+/* Image hero en <img> pour LCP optimisé */
+.hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
 }
 
 .hero::before {
@@ -87,11 +99,12 @@ a { text-decoration: none; color: inherit; }
     position: absolute;
     inset: 0;
     background: rgba(0,0,0,0.4);
+    z-index: 1;
 }
 
 .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     text-align: center;
     color: white;
     padding: 2rem;
@@ -456,6 +469,9 @@ a { text-decoration: none; color: inherit; }
 .mb-medium { margin-bottom: 1.5rem; }
 .mt-small { margin-top: 0.5rem; }
 
+/* Bouton flèche dropdown — caché sur desktop, visible uniquement mobile via media query */
+.nav-dropdown-arrow { display: none; }
+
 @media (max-width: 768px) {
     /* Dropdown mobile — statique, caché par défaut */
     .nav-menu > li > ul.dropdown {
@@ -468,4 +484,22 @@ a { text-decoration: none; color: inherit; }
     /* Mobile : forcer le réaffichage (déjà géré globalement, sécurité) */
     .nav-menu > li.has-dropdown.open > ul.dropdown { display: flex !important; }
     .cards-grid, .symptom-cards { grid-template-columns: 1fr; }
+
+    /* Bouton flèche dropdown mobile — visible uniquement sur mobile */
+    .nav-dropdown-arrow {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1rem;
+        padding: 0.2rem 0.6rem;
+        cursor: pointer;
+        opacity: 0.85;
+        line-height: 1;
+        vertical-align: middle;
+    }
+    /* Cacher le chevron CSS ::after sur mobile (remplacé par le bouton) */
+    .nav-menu > li.has-dropdown > a::after { display: none; }
 }

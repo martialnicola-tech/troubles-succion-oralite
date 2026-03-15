@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.nav-menu a');
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
-            if (window.innerWidth <= 768) {
+            if (window.innerWidth <= 900) {
                 // Only close if it's not a dropdown parent
                 const parentLi = this.closest('li');
                 if (!parentLi || !parentLi.classList.contains('has-dropdown')) {
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Dropdown toggle — mouseenter/mouseleave (desktop) + click (mobile)
+    // Dropdown toggle — mouseenter/mouseleave (desktop) + flèche bouton (mobile)
     const hasDropdowns = document.querySelectorAll('.nav-menu li.has-dropdown');
     hasDropdowns.forEach(item => {
         const link = item.querySelector(':scope > a');
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Desktop : afficher au survol avec délai de fermeture
         let closeTimer;
         item.addEventListener('mouseenter', function() {
-            if (window.innerWidth > 768) {
+            if (window.innerWidth > 900) {
                 clearTimeout(closeTimer);
                 hasDropdowns.forEach(other => {
                     if (other !== item) other.classList.remove('open');
@@ -69,22 +69,34 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         item.addEventListener('mouseleave', function() {
-            if (window.innerWidth > 768) {
+            if (window.innerWidth > 900) {
                 closeTimer = setTimeout(() => {
                     item.classList.remove('open');
                 }, 150);
             }
         });
 
-        // Mobile : toggle au clic
+        // Mobile : bouton flèche injecté → toggle sous-menu
+        // Le lien lui-même navigue normalement (pas de preventDefault)
         if (link) {
-            link.addEventListener('click', function(e) {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
+            const arrow = document.createElement('button');
+            arrow.className = 'nav-dropdown-arrow';
+            arrow.setAttribute('aria-label', 'Afficher le sous-menu');
+            arrow.innerHTML = '▾';
+            link.insertAdjacentElement('afterend', arrow);
+
+            arrow.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (window.innerWidth <= 900) {
                     hasDropdowns.forEach(other => {
-                        if (other !== item) other.classList.remove('open');
+                        if (other !== item) {
+                            other.classList.remove('open');
+                            const a = other.querySelector('.nav-dropdown-arrow');
+                            if (a) a.innerHTML = '▾';
+                        }
                     });
                     item.classList.toggle('open');
+                    this.innerHTML = item.classList.contains('open') ? '▴' : '▾';
                 }
             });
         }
@@ -97,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const menu = dropdown.querySelector('.dropdown-menu');
         if (link && menu) {
             link.addEventListener('click', function(e) {
-                if (window.innerWidth <= 768) {
+                if (window.innerWidth <= 900) {
                     e.preventDefault();
                     menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
                     menu.style.flexDirection = 'column';
@@ -126,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
             hasDropdowns.forEach(item => item.classList.remove('open'));
         }
         // Close mobile menu when clicking outside header
-        if (window.innerWidth <= 768 && !e.target.closest('.header')) {
+        if (window.innerWidth <= 900 && !e.target.closest('.header')) {
             if (navMenu) navMenu.classList.remove('active');
             if (navToggle) {
                 const spans = navToggle.querySelectorAll('span');
@@ -156,26 +168,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Scroll reveal animations
-window.addEventListener('scroll', function() {
-    const reveals = document.querySelectorAll('.symptome-card, .symptom-card, .intro-text, .intro-image, .card');
-    reveals.forEach(element => {
-        const windowHeight = window.innerHeight;
-        const elementTop = element.getBoundingClientRect().top;
-        if (elementTop < windowHeight - 100) {
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
-        }
-    });
-});
-
-// Initialize animation styles
+// Scroll reveal animations — IntersectionObserver (remplace le scroll listener)
 document.addEventListener('DOMContentLoaded', function() {
-    const animatedElements = document.querySelectorAll('.symptome-card, .symptom-card, .intro-text, .intro-image');
+    const animatedElements = document.querySelectorAll('.symptome-card, .symptom-card, .intro-text, .intro-image, .card');
+    if (!animatedElements.length) return;
+
+    // Appliquer les styles initiaux
     animatedElements.forEach(element => {
         element.style.opacity = '0';
         element.style.transform = 'translateY(20px)';
         element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     });
-    window.dispatchEvent(new Event('scroll'));
+
+    if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '0px 0px -100px 0px' });
+
+        animatedElements.forEach(el => revealObserver.observe(el));
+    } else {
+        // Fallback : afficher directement si IntersectionObserver non supporté
+        animatedElements.forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+        });
+    }
 });

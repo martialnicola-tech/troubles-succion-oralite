@@ -5,14 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ostéopathes - Troubles de la Succion</title>
     <meta name="description" content="Ostéopathes spécialisés dans la prise en charge des bébés et enfants avec troubles de la succion">
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="icon" type="image/png" href="/images/favicon-32.png" sizes="32x32">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="chatbot.css">
+<style>
+  .annuaire-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .annuaire-card { background: white; border-radius: 10px; padding: 1.25rem 1.5rem; border: 1px solid #e8e8e8; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: box-shadow 0.2s; }
+  .annuaire-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+  .annuaire-name { font-weight: 700; font-size: 1rem; color: #222; margin-bottom: 0.35rem; }
+  .annuaire-specialty { font-size: 0.8rem; font-weight: 600; color: white; background: var(--turquoise, #4ECDC4); display: inline-block; padding: 0.15rem 0.6rem; border-radius: 1rem; margin-bottom: 0.6rem; }
+  .annuaire-info { font-size: 0.88rem; color: #555; line-height: 1.7; }
+  .annuaire-info a { color: var(--turquoise, #4ECDC4); text-decoration: underline; }
+  .annuaire-phone { font-weight: 600; color: #333; }
+  @media (max-width: 900px) { .annuaire-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .annuaire-grid { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
         <header class="header">
         <div class="header-content">
             <div class="logo">
                 <a href="index.html">
-                    <img src="images/logo.png" alt="Troubles de la Succion" class="logo-img">
+                    <img src="/images/logo.svg" alt="Troubles de la Succion" class="logo-img">
                 </a>
             </div>
             <nav class="nav">
@@ -72,98 +87,24 @@
                 </nav>
         </div>
     </header>
-            <section class="hero" style="background-image: url('images/hero/osteopathe-nourrisson-frein-lingual-suisse-romande.jpg'); background-color: var(--turquoise);">
+            <section class="hero" style="background-image: url('/images/hero/osteopathe-specialise-nourrisson-et-frein-lingual-suisse-romande.jpg'); background-color: var(--turquoise);">
         <div class="hero-content">
             <h1 class="hero-title">Liste<br>des<br>Ostéopathes</h1>
         </div>
     </section>
     <section class="section">
         <div class="container">
-            <div class="team-grid">
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Christelle Nicola Avanthay</p>
-                    <p class="team-info">079 764 90 83</p>
-                    <p class="team-info">Chemin de Chanrion 68</p>
-                    <p class="team-info">1893 Muraz</p>
-                    <p class="team-info"><a href="https://www.osteobebe.ch" target="_blank">www.osteobebe.ch</a></p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Cécile Techer</p>
-                    <p class="team-info">079 764 90 83</p>
-                    <p class="team-info">Chemin de Chanrion 68</p>
-                    <p class="team-info">1893 Muraz</p>
-                    <p class="team-info"><a href="https://www.osteobebe.ch" target="_blank">www.osteobebe.ch</a></p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Céline Rossier</p>
-                    <p class="team-info">077 440 56 80</p>
-                    <p class="team-info">Route de Corberaye 6C (Centre AST)</p>
-                    <p class="team-info">1934 Le Châble</p>
-                    <p class="team-info">Rue du Pont 5 / 1870 Monthey</p>
-                    <p class="team-info"><a href="mailto:rossier.celine@protonmail.com">rossier.celine@protonmail.com</a></p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Charline Sanchez</p>
-                    <p class="team-info">079 451 37 38</p>
-                    <p class="team-info">Espace de santé intégrative</p>
-                    <p class="team-info">Route du stand 11</p>
-                    <p class="team-info">1880 Bex</p>
-                    <p class="team-info"><a href="mailto:charline@sante-bex.ch">charline@sante-bex.ch</a></p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Adeline Emery</p>
-                    <p class="team-info">077 457 88 18</p>
-                    <p class="team-info">Espace de santé intégrative</p>
-                    <p class="team-info">Route du stand 11</p>
-                    <p class="team-info">1880 Bex</p>
-                    <p class="team-info"><a href="mailto:adelineemerypro@gmail.com">adelineemerypro@gmail.com</a></p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Mylène Vogel-Gillioz</p>
-                    <p class="team-info">079 381 71 96</p>
-                    <p class="team-info">Au Centre de Prévention et Santé de Grône</p>
-                    <p class="team-info">Rue Centrale 123</p>
-                    <p class="team-info">3979 Grône</p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Lauriane Gay</p>
-                    <p class="team-info">Ancienne route cantonale 40</p>
-                    <p class="team-info">1902 Evionnaz</p>
-                    <p class="team-info"><a href="mailto:lauriane@osteau.ch">lauriane@osteau.ch</a></p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Stéphanie Borboën-Besse</p>
-                    <p class="team-info">079 191 99 26</p>
-                    <p class="team-info">Chemin des Truits 31</p>
-                    <p class="team-info">1867 Ollon</p>
-                </div>
-                <div class="team-card">
-                    <div style="width:100%; aspect-ratio:4/3; border:2px dashed #ccc; background:#f5f5f5; margin-bottom:1rem;"></div>
-                    <p class="team-name">Mahaux Véronique</p>
-                    <p class="team-info">076 586 50 54</p>
-                    <p class="team-info">Place de l'Hôtel de Ville 2</p>
-                    <p class="team-info">1867 Ollon</p>
-                </div>
-                <div class="team-card"></div>
-                <div class="team-card"></div>
-                <div class="team-card"></div>
-            </div>
+            <div id="equipe-pros-grid" class="annuaire-grid" data-specialite="osteopathe"></div>
         </div>
     </section>
 
     <section class="section" style="padding-top:0;">
         <div class="container">
             <hr style="margin-bottom:2rem;">
-            <p>•</p>
-            <p>•</p>
+            <div style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-top:1.5rem;">
+                <a href="equipe.html" class="btn btn-outline">← L'Équipe</a>
+                <a href="equipe-sages-femmes.html" class="btn btn-primary">Sages-Femmes →</a>
+            </div>
         </div>
     </section>
     <footer class="footer">
@@ -177,6 +118,7 @@
         </div>
     </footer>
     <script src="js/script.js"></script>
-<script src="chatbot.js"></script>
+<script src="chatbot.js" defer></script>
+<script src="/js/equipe-dynamique.js"></script>
 </body>
 </html>
